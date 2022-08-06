@@ -6,9 +6,9 @@
 
 ## Objetivos
 
-* Analizar y evaluar características de un traductor.
-* Desarrollar un traductor.
-* Entender como se construyen (decisiones de diseño).
+* Analizar y evaluar características de un traductor para su inclusión en un proyecto de informática.
+* Desarrollar traductores.
+* Entender cómo se construyen (decisiones de diseño).
 
 ## Programa
 
@@ -20,9 +20,9 @@
 
 ## Bibliografía
 
-* [Compiladores (Aho)](biblio/)
-* [Compiladores (Ruiz Catalán)](biblio/)
-* [Apuntes](doc/)
+* [Compiladores: Principios, técnicas y herramientas (Alfred Aho)](biblio/)
+* [Compiladores. Teoría e implementación (Jacinto Ruiz Catalán)](biblio/)
+* [Apuntes (Pablo Pandolfo)](doc/)
 
 ## Condiciones para aprobar
 
