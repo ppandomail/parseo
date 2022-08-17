@@ -1,0 +1,129 @@
+package ar.edu.ub.dc.compilador_robotgrid;
+
+import java_cup.runtime.*;
+
+action code
+{:
+	public void forFunc (int num, int instr) {
+		for (int i = 0; i < num; i++) {
+			if (instr == 0) 
+				GridMap.move();
+			else if (instr == 1) 
+					GridMap.turnLeft();
+				 else 
+				 	throw new IllegalArgumentException("forFunc: Instrucción ilegal");
+		}
+	}
+:}
+
+terminal IF, WHILE, ITERATE, START, END, DRAWGRID, PLACEROBOT, PLACEWALL, MOVE, TURNLEFT, FCLEAR, LPAREN, RPAREN, COMMA, SCOLON, RBRACE, LBRACE, NEQ;
+terminal String DIR;
+terminal Integer NUMBER;
+non terminal program, initial, robot, wallList, wall, statementList, statement, iteration, loop, conditional;
+non terminal Integer instruction, cond;
+non terminal GridMap grid;
+
+program ::= initial START statementList END 
+			{:
+				System.out.println("[Sintaxis completada satisfactoriamente]"); 
+			:};
+
+initial ::= grid wallList robot
+			{: 
+				GridMap.printState(); 
+			:};
+
+grid ::= DRAWGRID LPAREN NUMBER:n1 COMMA NUMBER:n2 RPAREN SCOLON
+		 {: 
+		 	RESULT = new GridMap(n1,n2); 
+		 :};
+
+wallList ::= wallList wall
+			| //empty
+			;
+
+wall ::= PLACEWALL LPAREN NUMBER:n1 COMMA NUMBER:n2 RPAREN SCOLON
+		 {: 
+		 	GridMap.setElement(n1,n2,"Wall"); 
+		 :};
+
+robot ::= PLACEROBOT LPAREN NUMBER:n1 COMMA NUMBER:n2 COMMA DIR:d RPAREN SCOLON
+		  {: 
+		  	GridMap.setElement(n1,n2,d.charAt(0)); 
+		  :};
+
+statementList ::= statementList statement
+				 | statement
+				 ;
+
+statement ::= iteration
+			| loop
+			| conditional
+			| instruction:i 
+			{: 
+				if (i == 0) 
+					GridMap.move(); 
+				else
+					GridMap.turnLeft(); 
+			:};
+
+iteration ::= ITERATE LPAREN NUMBER:n RPAREN LBRACE instruction:i RBRACE
+			{: 
+				forFunc(n, i); 
+			:};
+
+conditional ::= IF LPAREN cond:b RPAREN LBRACE instruction:i RBRACE
+			{: 
+				if (b == 0) {
+					if (GridMap.isFrontClear()) { 
+						if	(i == 0) 
+							GridMap.move(); 
+						else 
+							GridMap.turnLeft(); 
+					}
+				} else { 
+					if (!GridMap.isFrontClear()) { 
+						if (i == 0) 
+							GridMap.move(); 
+						else 
+							GridMap.turnLeft(); 
+					}
+				}
+			:};
+
+loop ::= WHILE LPAREN cond:b RPAREN LBRACE instruction:i RBRACE
+		{: 
+			if (b == 0) {
+				while (GridMap.isFrontClear()) {
+					if (i == 0) 
+						GridMap.move(); 
+					else 
+						GridMap.turnLeft();
+				}
+			} else { 
+				while (!GridMap.isFrontClear()) { 
+					if (i== 0) 
+						GridMap.move(); 
+					else
+						GridMap.turnLeft(); 
+				}
+			}
+		:};
+
+cond ::= FCLEAR 
+		{: 
+			RESULT = 0; 
+		:}
+		| NEQ FCLEAR
+		{: 
+			RESULT = 1; 
+		:};
+
+instruction ::= MOVE SCOLON 
+			{: 
+				RESULT = 0; 
+			:}
+			| TURNLEFT SCOLON 
+			{: 
+				RESULT = 1; 
+			:};

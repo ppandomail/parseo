@@ -1,0 +1,17 @@
+package ar.edu.ub.dc.compilador_booleano;
+
+import java_cup.runtime.*;
+
+terminal OPERANDO, OPERADOR, FIN_SENTENCIA;
+
+non terminal S, A, O;
+
+start with S;
+
+S ::= A FIN_SENTENCIA;
+
+A ::= A O;
+
+A ::= OPERANDO O;
+
+O ::= OPERADOR OPERANDO;

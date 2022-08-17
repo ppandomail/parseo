@@ -1,0 +1,19 @@
+package ar.edu.ub.dc.compilador_colchita;
+
+import java_cup.runtime.*;
+
+terminal GIRO, COSTURA, RETAZO_A, RETAZO_B,
+
+PARABRE,PARCIERRA, COMA;
+
+non terminal EXPRESION;
+
+start with EXPRESION;
+
+EXPRESION ::= RETAZO_A;
+
+EXPRESION ::= RETAZO_B;
+
+EXPRESION ::= GIRO PARABRE EXPRESION PARCIERRA;
+
+EXPRESION ::= COSTURA PARABRE EXPRESION COMA EXPRESION PARCIERRA;

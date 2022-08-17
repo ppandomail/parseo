@@ -1,0 +1,10 @@
+Inicio
+mov_ver(-1)
+mov_lat(-2) 
+mov_ver(+1)
+mov_ver(-1)
+mov_lat(+11)
+L(2)
+mov_lat(0)
+V(10)
+Fin

@@ -1,0 +1,17 @@
+package ar.edu.ub.dc.compilador_declaracion;
+
+import java_cup.runtime.*;
+
+terminal ID, ENTERO, BOOLEANO, PUNTOCOMA;
+
+non terminal DECLARACION;
+
+start with DECLARACION;
+
+DECLARACION ::= ENTERO ID PUNTOCOMA;
+
+DECLARACION ::= BOOLEANO ID PUNTOCOMA;
+
+DECLARACION ::= ENTERO ID PUNTOCOMA DECLARACION;
+
+DECLARACION ::= BOOLEANO ID PUNTOCOMA DECLARACION;

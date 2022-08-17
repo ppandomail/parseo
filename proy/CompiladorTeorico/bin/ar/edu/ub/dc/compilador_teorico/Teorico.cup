@@ -1,0 +1,70 @@
+// Herramienta se descarga de: https://www.cs.princeton.edu/~appel/modern/java/CUP/
+
+
+/* Especificación del paquete e importaciones
+Se indican opcionalmente las clases que se necesitan importar.
+También puede indicarse el paquete al que se quieren hacer pertenecer las
+clases generadas.
+*/
+
+
+/* Código de usuario
+action code {:  
+	//código java accesible a las acciones semánticas.
+:}
+
+parser code {: 
+	//código java dentro de la propia clase parser.
+:}
+
+init with {: 
+	//código java que se ejecuta antes de realizar la solicitud del primer token;
+	//ejempplo: abrir archivo, inicializar estructuras de almacenamiento, etc. 
+:}
+
+scan with {: 
+	//código java que devuelve el siguiente token a la entrada.
+:}
+*/
+
+/* Listas de símbolos
+Se enumeran todos los terminales y no terminales de la gramática.
+Ejemplo:
+terminal NombreClase terminal1, terminal2, etc.;
+non terminal NombreClase noTerminal1, noTerminal2, etc.;
+*/
+
+/* Asociatividad y precedencia:
+Permite resolver los conflictos desplazar/reducir ante determinados terminales.
+Ejemplo:
+precedence left terminal1, terminal2, etc.; => opta por reducir en vez de
+desplazar al encontrarse un conflicto en el que el siguiente token es
+terminal1 o terminal2, etc.
+
+precedence right terminal1, terminal2, etc.; => opta por desplazar en
+los mismos casos.
+
+precedence nonassoc terminal1, terminal2, etc.; => produciría un error
+sintáctico en caso de encontrarse con un conflicto desplazar/reducir en
+tiempo de análisis.
+
+Mientras más abajo se encuentre una cláusula de precedencia, más prioridad
+tendrá a la hora de reducir por ella.
+Ejemplo:
+precedence left SUMAR, RESTAR;
+precedence left MULTIPLICAR, DIVIDIR;
+
+Lo que quiere decir que, en caso de ambigüedad, MULTIPLICAR y
+DIVIDIR tiene más prioridad que SUMAR y RESTAR
+*/
+
+/* Gramática
+Gramática a reconocer, expresada mediante reglas de producción que deben
+acabar en punto y coma, y donde el símbolo ::= hace las veces de flecha.
+
+start with noTerminal;
+
+expr ::= expr:e1 MAS expr:e2
+	     {: RESULT = new Integer(e1.intValue() + e2.intValue()); :}
+
+*/

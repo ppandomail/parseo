@@ -1,0 +1,12 @@
+drawGrid(5,5);
+placeWall(0,1);
+placeWall(2,3);
+placeWall(9,9);
+placeRobot(0,1,N);
+START
+iterate (3) { turnLeft; }
+while (frontClear) {move;}
+if (!frontClear) {turnLeft;}
+if (!frontClear) {turnLeft;}
+move; move; turnLeft;
+END

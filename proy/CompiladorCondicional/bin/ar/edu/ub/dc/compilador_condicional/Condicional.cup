@@ -1,0 +1,63 @@
+package ar.edu.ub.dc.compilador_condicional;
+
+import java_cup.runtime.*;
+
+action code{:
+	public void imprimeValor(String str){
+		System.out.println("el valor del token: " + str);
+   	}
+:}
+
+parser code{:
+	public void syntax_error(Symbol st){
+    	token t=(token)st.value;
+    	report_error("Error Sintactico:"+ t.getValor()+ "- " + t.getX() + "-" + t.getY(), null);
+    }
+:}
+
+
+non terminal token COND, OREXP,ANDEXP,IGEXP,CMP,SIMBOLOS_COMPARAR,TIPO_DATO;
+terminal token or_, and_, igual_igual, no_igual, mayor, menor, mayor_igual, menor_igual,
+open_par, close_par, id, numero, verdadero, falso;
+start with COND; 
+
+COND::=OREXP;
+
+OREXP::=OREXP or_ ANDEXP
+    |ANDEXP;
+
+ANDEXP::=ANDEXP and_ IGEXP
+      |IGEXP;
+
+IGEXP::= IGEXP igual_igual CMP
+      |IGEXP no_igual CMP
+      |CMP;
+
+SIMBOLOS_COMPARAR::=mayor:m {: RESULT=m; :}
+		|menor:m {: RESULT=m; :}
+		|mayor_igual:m {: RESULT=m; :}
+		|menor_igual:m {: RESULT=m; :};
+
+CMP::= CMP:c SIMBOLOS_COMPARAR:sc TIPO_DATO:t{:
+                String val1=c.getValor();
+                String val2=t.getValor(); 
+           if(sc.getValor().equals(">")){
+                imprimeValor(val1+"mayor"+val2);
+            }
+            if(sc.getValor().equals("<")){
+                imprimeValor(val1+"menor"+val2);
+            }
+            if(sc.getValor().equals("<=")){
+                imprimeValor(val1+"menor igual"+val2);
+             }
+            if(sc.getValor().equals(">=")){
+                imprimeValor(val1+">="+val2);
+            }
+      :}
+      |TIPO_DATO:T {: RESULT=T; :}
+      |open_par COND:c close_par {: RESULT=c; :};
+
+TIPO_DATO::= id:i {: RESULT=i; :}
+          |numero:n {: RESULT=n; :}
+          |verdadero:t {: RESULT=t; :}
+          |falso:f {: RESULT=f; :};

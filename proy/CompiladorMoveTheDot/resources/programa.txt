@@ -1,0 +1,7 @@
+Inicio
+U(-8,-10)
+Repetir(3)[mov_lat(+3)]
+Repetir(2)[mov_ver(+3)]
+L(-1)
+V(+1)
+Fin

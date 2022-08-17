@@ -1,0 +1,11 @@
+1. Crear proyecto java con nombre. Ejemplo: CompiladorXxx
+2. Crear folder. Ejemplo: lib
+3. Copiar archivos jars: jflex y cup a la carpeta lib.
+4. Agregar los archivos jars al build path del proyecto.
+5. Crear paquete. Ejemplo: ar.edu.ub.dc.compilador_xxx
+6. Crear archivo xxx.jflex y declarar los patrones.
+7. Crear archivo xxx.cup y declarar la gramática.
+8. Crear clase GeneradorScanner y ejecutarla para obtener la clase Scanner. Ver consola.
+9. Crear clase GeneradorParser y ejecutarla para obtener la clase Parser y sym. Ver consola.
+10. Crear archivo programa.txt y codificar en el lenguaje diseñado.
+11. Crear clase Main y ejecutarla para obtener resultado de la compilación. Ver consola.
