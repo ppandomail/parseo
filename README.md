@@ -13,8 +13,8 @@
 ## Programa
 
 1. [Introducción](doc/intro.md)
-1. [Léxico](doc/lexico.md)
-1. [Sintáctico: ASD y ASA](doc/sintactico.md)
+1. [Léxico](doc/scanner.md)
+1. [Sintáctico: ASD y ASA](doc/parser.md)
 1. [Semántico](doc/semantico.md)
 1. [Generación de Código](doc/generacion.md)
 
