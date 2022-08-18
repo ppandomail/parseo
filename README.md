@@ -28,4 +28,14 @@
 
 * 75% asistencia
 * Aprobar 2 parciales con nota >= 4
+* Aprobar TP
 * Final con nota >= 4
+
+## TP
+
+1. Definir y describir un lenguaje de programación.
+1. Declarar directivas jlex (expresiones regulares).
+1. Declarar directivas cup (gramática).
+1. Declarar y programar acciones semánticas para cada una de las producciones de la gramática.
+1. Mostrar la ejecución de diferentes programas (casos de errores y éxitos).
+1. Conclusiones.
