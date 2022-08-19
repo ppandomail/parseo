@@ -1,4 +1,4 @@
-# Analisis Léxico (Scanner)
+# Análisis Léxico (Scanner)
 
 ## Conceptos básicos
 
@@ -22,12 +22,12 @@
 1. Agrupar los caracteres que va leyendo uno a uno del programa fuente y formar los tokens.
 1. Pasar los tokens válidos al parser.
 1. Gestionar (abrir, leer y cerrar) el archivo que contiene el código fuente.
-1. Eliminar comentarios, tabuladores, espaciones en blanco, saltos de línea.
+1. Eliminar comentarios, tabuladores, espacios en blanco, saltos de línea.
 1. Relacionar los errores con las líneas del programa.
 1. Expansión de macros.
 1. Inclusión de archivos.
 1. Reconocimientos de las directivas de compilación.
-1. Introducir identificadores en la tabla de símbolos (opcional, pudiendo realizarsee tambien por parte del parser).
+1. Introducir identificadores en la tabla de símbolos (opcional, pudiendo realizarse también por parte del parser).
 1. Dependiendo de la naturaleza del código fuente, podría ser necesario realizar una pasada previa para examinarlo y posteriormente procesarlo.
 
 ## Definiciones básicas
@@ -97,7 +97,7 @@
 
 | f| a | b |
 | -- | -- | -- |
-| >q0 | q1 | q1 |
+| >q0 | q1 | - |
 | *q1 | q0 | q1 |
 
 * En las filas: los estados (q)
@@ -117,9 +117,9 @@
 ## Ejemplo: Reconocimiento de identificadores
 
 * Un identificador está formado por al menos una **letra mayúscula o minúscula** (ejemplo, a) seguida de forma opcional por mas letras o números (ejemplo, aa, a1, etc.).
-* letra = [a-z][A-Z]
-* número = [0-9]
-* otro = [otro]
+* letra ::= [a-zA-Z]
+* número ::= [0-9]
+* otro ::= [otro]
 
 ![AF ID](img/af-id.png)
 
@@ -132,7 +132,7 @@
   * PRODUCTO ::= "*"
   * INCREMENTO ::= "++"
 * Un asterisco en un estado de aceptación indica que el puntero que señala la lectura del siguiente símbolo (para reconocer el siguiente token) debe retroceder una unidad (si hubiera más asteriscos, retrocedería tantas unidades como asteriscos)
-* Tras la llegada a un estado de aceptación, se le pasaría el token al analizador sintáctico y se esperaría una nueva petición de éste para comenzar otra vez en el estado 0 del autómata.
+* Tras la llegada a un estado de aceptación, se le pasaría el token al parser y se esperaría una nueva petición de éste para comenzar otra vez en el estado 0 del autómata.
 
 ![AF Aritmética](img/af-aritmetica.png)
 
@@ -160,7 +160,7 @@
 
 * **Utilizando un generador de scaners**:
   * Son herramientas que a partir de las ER generan un programa que permite reconocer los tokens o componentes léxicos.
-  * Suelen estar escritos en C (FLEX) o Java (JFLEX o JLEX)
+  * Suelen estar escritos en C (LEX) o Java (JFLEX)
   * Ventajas: comodidad y rapidez de desarrollo.
   * Desventajas: programas ineficientes y dificultad de mantenimiento del código generado.
 
@@ -181,27 +181,27 @@
   * **Palabras reservadas escritas incorrectamente**: se producen errores de ortografía. El problema aquí es cómo distingues entre un identificador y una variable reservada.
   * **Caracteres que no pertenecen al alfabeto del lenguaje**: Ejemplos: @, €, ¿, ?, ñ, etc.
 
-## JLex
+## JFlex
 
 * Es un generador de scanners.
 * Generador de programas java diseñado para procesamiento léxico.
 * Parte de un conjunto de reglas léxicas.
 * JLex produce un programa llamado Yylex que reconoce las cadenas que cumplen dichas reglas.
 
-![JLex](img/jlex.png)
+![JFlex](img/jlex.png)
 
 * Lo primero es crear un archivo para el análisis léxico con JLex.
 * Este archivo especificará los lexemas aceptables por el compilador.
 * Por ejemplo, si se va a utilizar la sentencia while para los bucles pero no la for, el scanner dará un aviso de error si se encuentra una sentencia for.
 
-### Uso de JLex
+### Uso de JFlex
 
 * El formato de especificación es el siguiente:
 
   ```plain
   Código de Usuario
   %% {opciones y declaraciones}
-  Directivas JLex
+  Directivas JFlex
   %% {reglas léxicas}
   Expresiones Regulares
   ```
