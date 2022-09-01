@@ -277,10 +277,16 @@
   * Daría errores para: c12, 01, ad, 12a
 
   ```plain
-  "[a-b][a-b0-9]*" {return new Symbol(sym.ID); }
-  {NUMERO} {return new Symbol(sym.NUMERO, new Integer(yytext()); }
-  (" "|\n|\t|\r)+ {}
-  . {System.out.println(“Carácter ilegal en línea” + yyline); }
+  import java_cup.runtime.Symbol;
+  %%
+  %public
+  %class Prueba
+  %standalone
+  %%
+  [a-b][a-b0-9]* {System.out.println("OK"); }
+  \r|\n|\r\n {System.out.println("ENTER"); }
+  [ \t\f] {System.out.println("ESPACIO"); }
+  . {System.out.println("FAIL"); }
   ```
 
 #### Funciones
@@ -296,7 +302,7 @@
 
   ```plain
   %%
-  %class Lexer
+  %class Scanner
   %standalone
   %line
   %column
@@ -326,24 +332,24 @@
     1. Escribir un programa en Java para implementar la tabla.
 
 1. Escriba un analizador léxico que:
-1. Sustituya las apariciones de un número par escrito en notación binaria por la cadena “BINARIO_PAR”.
-1. Sustituya las cadenas casa, camisa y carcasa que figuran en un texto por la cadena “CA_SA”.
-1. Reduzca a un único espacio en blanco todas las secuencias de espacios en blanco y tabuladores de un texto.
-1. Suprima los comentarios de línea de un texto (desde un # hasta el fin de la línea).
-1. Inserte un * delante y detrás de cada carácter + que figura en un texto.
-1. Enmarca entre corchetes el carácter que precede a cada uno de los puntos que figuran en un texto.
-1. Sustituya las apariciones de un número de la semana (de 1 a 7) por su correspondiente nombre de día.
-1. Sustituya los operadores de suma +, resta -, producto * y división / y potencia ^ por la cadena "OPERADOR“.
-1. Sustituya las apariciones de un número escrito en base hexadecimal por la cadena "HEXADECIMAL".
-1. Escriba en mayúsculas todas las palabras de un texto que comienzan por mayúsculas. (Considere que una palabra es una secuencia constituida por letras minúsculas o mayúsculas).
-1. Sustituya todas las cadenas de un texto por el contenido de la cadena sin las comillas (Por ejemplo: "hola" sería sustituido por hola). Se define como cadena cualquier texto enmarcado entre comillas dobles con la condición de que en su contenido no figuran ni comillas dobles ni saltos de línea.
-1. Sustituya las apariciones de número reales en notación científica por la cadena "REAL". Se admiten como cadenas (lexemas): -3.4 .4 3.E10 .6e-2. No se admiten las siguientes: 45 4.6E .
-1. Sustituya las expresiones horarias que encajan o bien con el patrón HH:MM o bien con el patrón H:MM por la cadena "HORA". Tenga en cuenta que las horas deben ser correctas. Por ejemplo: 29:80 no sería una hora correcta.
-1. Sustituye las palabras de un texto que empiezan por minúsculas por la cadena MINÚSCULA y las palabras que empiecen por mayúsculas por la cadena MAYÚSCULA.
-1. Para representar fechas existen dos formatos: el americano (AAAA/DD/MM) y el europeo (DD/MM/AAAA). Escriba un analizador léxico que imprima todas las fechas de un texto que se ajusten a uno de dichos formatos indicando además qué formato fue usado (Ignore la problemática relacionada con los años bisiestos).
-1. Sustituya cada identificador de un texto por la cadena IDENT salvo que el identificador sea una de las palabras reservadas: If, Then o Else. En este último caso deberá imprimirse respectivamente las cadenas IF, THEN y ELSE. Las anteriores palabras reservadas no son sensibles a la capitalización, es decir, podrán aparecer mezcladas arbitrariamente letras minúsculas y mayúsculas. Por ejemplo, para la palabra reservada Else se admiten también las formas ELSe o eLsE.
-1. Distinga entre los siguientes tipos de números: entero (INT) entero largo (LONG) y real (FLOAT). Los enteros largos son enteros terminados con una letra l mayúscula o minúscula. Los reales deben incluir de forma obligatoria parte entera y parte decimal separadas por un punto.
-1. Reconozca “Identificadores de cualquier longitud que comience con a y contenga a, b o c. No pueden terminar con c y además no pueden contener dos c seguidas.
-1. Reconozca “Identificadores sobre el alfabeto {a,b,c} que tienen por lo menos tres letras”.
-1. Reconozca “Identificadores sobre el alfabeto {%, &} cuyas palabras verificar las siguientes restricciones: 1) Si una palabra tiene menos de cinco &, entonces tiene un número par de &. 2) Si una palabra tiene cinco & o más, entonces contiene un número impar de &. 3) Cualquier palabra contiene al menos un &.
-1. Una cadena comando es el nombre del comando seguido de uno o más espacios en blanco, y a continuación una lista de parámetros que puede ser vacía. Un comando es una secuencia no vacía de cadenas comando separadas por un delimitador. Un delimitador es un elemento del conjunto {. , ;}. Un nombre comienza con una letra y sigue con cero o más letras o dígitos. La lista de parámetros es una secuencia de uno o más nombres separados por uno o más espacios en blanco. Opciones: Expresión regular o gramática regular o autómata finito determinista que reconozca las palabras de dicho lenguaje. Se acepta cerradura positiva. Usar como símbolo de blanco la b tachada.
+    1. Sustituya las apariciones de un número par escrito en notación binaria por la cadena “BINARIO_PAR”.
+    1. Sustituya las cadenas casa, camisa y carcasa que figuran en un texto por la cadena “CA_SA”.
+    1. Reduzca a un único espacio en blanco todas las secuencias de espacios en blanco y tabuladores de un texto.
+    1. Suprima los comentarios de línea de un texto (desde un # hasta el fin de la línea).
+    1. Inserte un * delante y detrás de cada carácter + que figura en un texto.
+    1. Enmarca entre corchetes el carácter que precede a cada uno de los puntos que figuran en un texto.
+    1. Sustituya las apariciones de un número de la semana (de 1 a 7) por su correspondiente nombre de día.
+    1. Sustituya los operadores de suma +, resta -, producto * y división / y potencia ^ por la cadena "OPERADOR“.
+    1. Sustituya las apariciones de un número escrito en base hexadecimal por la cadena "HEXADECIMAL".
+    1. Escriba en mayúsculas todas las palabras de un texto que comienzan por mayúsculas. (Considere que una palabra es una secuencia constituida por letras minúsculas o mayúsculas).
+    1. Sustituya todas las cadenas de un texto por el contenido de la cadena sin las comillas (Por ejemplo: "hola" sería sustituido por hola). Se define como cadena cualquier texto enmarcado entre comillas dobles con la condición de que en su contenido no figuran ni comillas dobles ni saltos de línea.
+    1. Sustituya las apariciones de número reales en notación científica por la cadena "REAL". Se admiten como cadenas (lexemas): -3.4 .4 3.E10 .6e-2. No se admiten las siguientes: 45 4.6E .
+    1. Sustituya las expresiones horarias que encajan o bien con el patrón HH:MM o bien con el patrón H:MM por la cadena "HORA". Tenga en cuenta que las horas deben ser correctas. Por ejemplo: 29:80 no sería una hora correcta.
+    1. Sustituye las palabras de un texto que empiezan por minúsculas por la cadena MINÚSCULA y las palabras que empiecen por mayúsculas por la cadena MAYÚSCULA.
+    1. Para representar fechas existen dos formatos: el americano (AAAA/DD/MM) y el europeo (DD/MM/AAAA). Escriba un analizador léxico que imprima todas las fechas de un texto que se ajusten a uno de dichos formatos indicando además qué formato fue usado (Ignore la problemática relacionada con los años bisiestos).
+    1. Sustituya cada identificador de un texto por la cadena IDENT salvo que el identificador sea una de las palabras reservadas: If, Then o Else. En este último caso deberá imprimirse respectivamente las cadenas IF, THEN y ELSE. Las anteriores palabras reservadas no son sensibles a la capitalización, es decir, podrán aparecer mezcladas arbitrariamente letras minúsculas y mayúsculas. Por ejemplo, para la palabra reservada Else se admiten también las formas ELSe o eLsE.
+    1. Distinga entre los siguientes tipos de números: entero (INT) entero largo (LONG) y real (FLOAT). Los enteros largos son enteros terminados con una letra l mayúscula o minúscula. Los reales deben incluir de forma obligatoria parte entera y parte decimal separadas por un punto.
+    1. Reconozca “Identificadores de cualquier longitud que comience con a y contenga a, b o c. No pueden terminar con c y además no pueden contener dos c seguidas.
+    1. Reconozca “Identificadores sobre el alfabeto {a,b,c} que tienen por lo menos tres letras”.
+    1. Reconozca “Identificadores sobre el alfabeto {%, &} cuyas palabras verificar las siguientes restricciones: 1) Si una palabra tiene menos de cinco &, entonces tiene un número par de &. 2) Si una palabra tiene cinco & o más, entonces contiene un número impar de &. 3) Cualquier palabra contiene al menos un &.
+    1. Una cadena comando es el nombre del comando seguido de uno o más espacios en blanco, y a continuación una lista de parámetros que puede ser vacía. Un comando es una secuencia no vacía de cadenas comando separadas por un delimitador. Un delimitador es un elemento del conjunto {. , ;}. Un nombre comienza con una letra y sigue con cero o más letras o dígitos. La lista de parámetros es una secuencia de uno o más nombres separados por uno o más espacios en blanco. Opciones: Expresión regular o gramática regular o autómata finito determinista que reconozca las palabras de dicho lenguaje. Se acepta cerradura positiva. Usar como símbolo de blanco la b tachada.
