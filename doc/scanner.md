@@ -333,11 +333,65 @@
 
 1. Escriba un analizador léxico que:
     1. Sustituya las apariciones de un número par escrito en notación binaria por la cadena “BINARIO_PAR”.
+
+        ```plain
+        %%
+        %class Ejer
+        %standalone
+        %line
+        %column
+        BINARIO_PAR = ([0-1]*)0
+        BINARIO_NO_PAR = ([0-1]*)1
+        %% 
+        {BINARIO_PAR} {System.out.print("BINARIO_PAR ");}
+        {BINARIO_NO_PAR} {System.out.print(yytext()+" ");}
+        (" "|\t|\r)+ {}
+        (\n) {System.out.println(" ");}
+        ```
+
     1. Sustituya las cadenas casa, camisa y carcasa que figuran en un texto por la cadena “CA_SA”.
+
+        ```plain
+        CA_SA = "ca"("rca"|"mi")?"sa"
+        %% 
+        {CA_SA} {System.out.print("CA_SA");}
+        (\n) {System.out.println(" ");}
+        .    {System.out.print(yytext());}
+        ```
+
     1. Reduzca a un único espacio en blanco todas las secuencias de espacios en blanco y tabuladores de un texto.
+
+        ```plain
+        ESPACIOS = [" " | \t]+
+        %% 
+        {ESPACIOS} {System.out.print(" ");}
+        (\n) {}
+        ```
+
     1. Suprima los comentarios de línea de un texto (desde un # hasta el fin de la línea).
+
+        ```plain
+        Comentario = #(.)*
+        %% 
+        {Comentario} {System.out.print("");}
+        . {System.out.print(yytext());}
+        ```
+
     1. Inserte un * delante y detrás de cada carácter + que figura en un texto.
+
+        ```plain
+        %% 
+        "+" {System.out.print("*" + yytext() + "*");}
+        ```
+
     1. Enmarca entre corchetes el carácter que precede a cada uno de los puntos que figuran en un texto.
+
+        ```plain
+        CORCHETE = (.)"."
+        %% 
+        {CORCHETE} {System.out.print("["+yycharat(0)+"].");}
+        ```
+
     1. Sustituya las apariciones de un número de la semana (de 1 a 7) por su correspondiente nombre de día.
     1. Sustituya los operadores de suma +, resta -, producto * y división / y potencia ^ por la cadena "OPERADOR“.
     1. Sustituya las apariciones de un número escrito en base hexadecimal por la cadena "HEXADECIMAL".
