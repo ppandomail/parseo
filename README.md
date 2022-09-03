@@ -13,11 +13,17 @@
 ## Programa
 
 1. [Introducción](doc/intro.md)
-1. [Léxico](doc/scanner.md)
-1. [Sintáctico](doc/parser.md)
+1. Análisis Léxico
+    1. [Scanner](doc/scanner.md)
+    1. [JFlex](doc/jflex.md)
+1. Análisis Sintáctico
+    1. [Parser](doc/parser.md)
     1. [ASD](doc/ASD.md)
     1. [ASA](doc/ASA.md)
-1. [Semántico](doc/semantico.md)
+    1. [CUP](doc/cup.md)
+1. Análisis Semántico
+    1. [TT y TS](doc/tablas.md)
+    1. [Analizador Semántico](doc/semantico)
 1. [Generación de Código](doc/generacion.md)
 
 ## Bibliografía
