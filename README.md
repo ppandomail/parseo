@@ -23,7 +23,7 @@
     1. [CUP](doc/cup.md)
 1. Análisis Semántico
     1. [TT y TS](doc/tablas.md)
-    1. [Analizador Semántico](doc/semantico)
+    1. [Analizador Semántico](doc/semantico.md)
 1. [Generación de Código](doc/generacion.md)
 
 ## Bibliografía
