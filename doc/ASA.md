@@ -139,3 +139,229 @@ Paso 4: Armar la tabla de parsing
 | 0 1 6 3 | $ | R(4)  T -> F (se desapila 1 símbolo) |
 | 0 1 6 9 | $ | R(1) F -> E + T (se desapilan 3 símbolos) |
 | 0 1 | $ | accept |
+
+* Ejemplo 2:
+
+```grammar
+S -> aST
+S -> b
+T -> cT
+T -> d
+```
+
+| Q | a | b | c | d | $ | S | T |
+| -- | -- | -- | -- | -- | -- | -- | -- |
+| 0 | D(2) | D(3) | | | | 1 | |
+| 1 | | | | | OK | | |
+| 2 | D(2) | D(3) | | | | 4 | |
+| 3 | | | R(2) | R(2) | R(2) | | |
+| 4 | | | D(6) | D(7) | | | 5 |
+| 5 | | | R(1) | R(1) | R(1) | | |
+| 6 | | | D(6) | D(7) | | | 8 |
+| 7 | | | R(4) | R(4) | R(4) | | |
+| 8 | | | R(3) | R(3) | R(3) | | |
+
+| Pila | Entrada | Acción |
+| -- | -- | -- |
+| 0 | aabcdd$ | D(2) |
+| 0 2 | abcdd$ | D(2) |
+| 0 2 2 | bcdd$ | D(3) |
+| 0 2 2 3 | cdd$ | R(2) |
+| 0 2 2 4 | cdd$ | D(6) |
+| 0 2 2 4 6 | dd$ | D(7) |
+| 0 2 2 4 6 7 | d$ | R(4) |
+| 0 2 2 4 6 8 | d$ | R(3) |
+| 0 2 2 4 5 | d$ | R(1) |
+| 0 2 4 | d$ | D(7) |
+| 0 2 4 7 | $ | R(4) |
+| 0 2 4 5 | $ | R(1) |
+| 0 1 | $ | accept|
+
+* Ejemplo 3:
+
+```grammar
+C -> AB
+A -> a
+B -> a
+```
+
+| Q | a | $ | A | B | C |
+| -- | -- | -- | -- | -- | -- |
+| 0 | D(3) | | 2 | | 1 |
+| 1 | | OK | | | |
+| 2 | D(5) | | | 4 | |
+| 3 | R(2) | | | | |
+| 4 | | R(1) | | | |
+| 5 | | R(3) | | | |
+
+| Pila | Entrada | Acción |
+| -- | -- | -- |
+| 0 | aa$ | D(3) |
+| 0 3 | a$ | R(2) |
+| 0 2 | a$ | D(5) |
+| 0 2 5 | $ | R(3) |
+| 0 2 4 | $ | R(1) |
+| 0 1 | $ | accept |
+
+* Ejemplo 4:
+
+```grammar
+E -> id + E
+E -> id
+```
+
+| Q | id | + | $ | E |
+| -- | -- | -- | -- | -- |
+| 0 | D(2) | | | 1 |
+| 1 | | | OK | |
+| 2 | | D(3) | R(2) | |
+| 3 | D(2) | | | 4 |
+| 4 | | | R(1) | |
+
+| Pila | Entrada | Acción |
+| -- | -- | -- |
+| 0 | id+id$ | D(2) |
+| 0 2 | +id$ | D(3) |
+| 0 2 3 | id$ | D(2) |
+| 0 2 3 2 | $ | R(2) |
+| 0 2 3 4 | $ | R(1) |
+| 0 1 | $ | accept |
+
+* Ejemplo 5:
+
+```grammar
+S -> aABe
+A -> Abc
+A -> b
+B -> d
+```
+
+| Q | a | b | c | d | e | $ | S | A | B |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| 0 | D(2) | | | | | | 1 | | |
+| 1 | | | | | | OK | | |
+| 2 | | D(4) | | | | | | 3 | |
+| 3 | | D(6) | | D(7) | | | | | 5 |
+| 4 | | R(3) | | R(3) | | | | | | |
+| 5 | | | | | D(8) | | | | | |
+| 6 | | | D(9) | | | | |  | | |
+| 7 | | | | | R(4) | | | | | |
+| 8 | | | | | | R(1) | | |  | |
+| 9 | | R(2) | | | R(2) | | | | | |
+
+| Pila | Entrada | Acción |
+| -- | -- | -- |
+| 0 | abde$ | D(2) |
+| 0 2 | bde$ | D(4) |
+| 0 2 4 | de$ | R(3) |
+| 0 2 3 | de$ | D(7) |
+| 0 2 3 7 | e$ | R(4) |
+| 0 2 3 5 | e$ | D(8) |
+| 0 2 3 5 8 | $ | R(1) |
+| 0 1 | $ | accept |
+
+* Ejemplo 6
+
+```grammar
+S -> (L)
+S -> id
+L -> SL’
+L’ -> ,SL’
+L’ -> λ
+```
+
+| Q | ( | ) | id | , | $ | S | L | L' |
+| -- | -- | -- | -- | -- | -- | -- | -- | -- |
+| 0 | D(2) | | D(3) | | | 1 |  | |
+| 1 | | | |  | OK  | | |
+| 2 | D(2) | | D(3) | | | 5 | 4 | |
+| 3 | | R(2) | | R(2) | R(2) | | | |
+| 4 | | D(6) | | | | | | | |
+| 5 | | R(5) | | D(8) | | | | 7 |
+| 6 | | R(1) | | R(1) | R(1) | | | |
+| 7 | | R(3) | | | | | | |
+| 8 | D(2) | | D(3) | | | 9 | | |
+| 9 | | R(5) | | D(8) | | | | 10 |
+| 10 | | R(4) | | | | | | |
+
+| Pila | Entrada | Acción |
+| -- | -- | -- |
+| 0 | (id)$ | D(2) |
+| 0 2 | id)$ | D(3) |
+| 0 2 3 | )$ | R(2) |
+| 0 2 5 | )$ | R(5) |
+| 0 2 5 7 | )$ | R(3) |
+| 0 2 4 | )$ | D(6) |
+| 0 2 4 6 | $ | R(1) |
+| 0 1 | $ | accept |
+
+## Conflictos en las tablas SLR
+
+* Hay dos posibles conflictos a la hora de construir una tabla SLR:
+  * **Desplazamiento-reducción**: se produce cuando en una misma celda se puede poner un desplazamiento y una reducción. Esto significa que la gramática no es SLR. Se puede resolver una de las dos opciones adecuada para que el analizador reconozca el lenguaje descrito por la gramática.
+  * **Reducción-reducción**: aparece cuando en una misma celda es posible reducir de dos maneras diferentes. Esto también implica que la gramática no es SLR. Su solución puede ser elegir una de las dos reducciones, teniendo cuidado de que el analizador reconozca bien el lenguaje definido por la gramática. También se puede optar por modificar la gramática para que eso no ocurra.
+
+## Ejercicios
+
+1. Para la siguiente gramática, construir el autómata y la tabla de análisis SLR:
+
+    ```grammar
+    S -> id X | id Y end
+    X -> otro | λ
+    Y -> begin X end | λ
+    ```
+
+    | Q | id | end | begin | otro | $ | S | X | Y |
+    | -- | -- | -- | -- | -- | -- | --  | -- | -- |
+    | 0 | D(2) | | | | | 1 | | |
+    | 1 | | | | | OK | | | |
+    | 2 | | R(4)/R(6) | D(7) | D(3) | R(4) | | 4 | 5 |
+    | 3 | | R(3) | | | R(3) | | | |
+    | 4 | | | | | R(1) | | | |
+    | 5 | | D(6) | | | | | | |
+    | 6 | | | | | R(2) | | | |
+    | 7 | | R(4) | | D(3) | D(4) | | 8 | |
+    | 8 | | D(9) | | | | | | |
+    | 9 | | R(5) | | | | | | |
+
+1. Para la siguiente gramática:
+
+    ```grammar
+    D -> var V : T ;
+    V -> id , V | id
+    T -> int | bool
+    ```
+
+    1. Construir el autómata.
+    1. Construir la tabla de análisis SLR.
+    1. Analizar la palabra var id , id : int ;
+
+    | Q | var | : | ; | id | , | int | bool | $ | D | V | T |
+    | -- | -- | -- | -- | -- | -- | --  | -- | -- | -- | -- | -- |
+    | 0 | D(2) | | | | | | | | 1 | | |
+    | 1 | | | | | | | | OK | | | |
+    | 2 | | | | D(4) | | | | | | 3 | |
+    | 3 | | D(5) | | | | | | | | | |
+    | 4 | | R(3) | | | D(6) | | | | | | |
+    | 5 | | | | | | D(8) | D(9) | | | | 7 |
+    | 6 | | | | D(4) | | | | | | 10 | |
+    | 7 | | | D(11) | | | | | | | | |
+    | 8 | | | R(4) | | | | | | | | |
+    | 9 | | | R(5) | | | | | | | | |
+    | 10 | | R(2) | | | | | | | | | |
+    | 11 | | | | | | | | R(1) | | | |
+
+    | Pila | Entrada | Acción |
+    | -- | -- | -- |
+    | 0 | var id , id : int ; $ | D(2) |
+    | 0 2 | id , id : int ; $ | D(4) |
+    | 0 2 4 | , id : int ; $ | D(6) |
+    | 0 2 4 6 | id : int ; $ | D(4) |
+    | 0 2 4 6 4 | : int ; $ | R(3) (V -> id) |
+    | 0 2 4 6 10 | : int ; $ | R(2) (V -> id, V) |
+    | 0 2 3 | : int ; $ | D(5) |
+    | 0 2 3 5 | int ; $ | D(8) |
+    | 0 2 3 5 8 | ;$ | R(4) (T -> int) |
+    | 0 2 3 5 7 | ;$ | D(11) |
+    | 0 2 3 5 7 11 | $ | R(1) (D -> var V : T ; ) |
+    | 0 1 | $ | accept |

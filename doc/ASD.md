@@ -70,21 +70,95 @@ Sino
 
 * Ejemplo 1:
 
-    ```grammar
-    S -> aST | b
-    T -> cT | d
-    ```
+  ```grammar
+  S -> aST | b
+  T -> cT | d
+  ```
 
   * PRIM(S) = PRIM(S -> aST) U PRIM(S -> b) = {a, b}
   * PRIM(T) = PRIM(T -> cT) U PRIM(T -> d) = {c, d}
 
 * Ejemplo 2:
 
-    ```grammar
-    S -> c(S,S) | g(S) | 1 | 2
-    ```
+  ```grammar
+  S -> c(S,S) | g(S) | 1 | 2
+  ```
 
   * PRIM(S) = PRIM(S -> c(S,S)) U PRIM(S -> g(S)) U PRIM(S -> 1) U PRIM(S -> 2) = {c, g, 1, 2}
+
+* Ejemplo 3:
+
+  ```grammar
+  P -> HDB |Pf 
+  H -> i | λ
+  D -> v|λ
+  B -> s |Dfd | λ
+  ```
+
+  * PRIM(H) = {i, λ}
+  * PRIM(D) = {v, λ}
+  * PRIM(B) = {s, v, fd, λ}
+  * PRIM(P) = {i, s, v, fd, λ, f}
+
+* Ejemplo 4:
+
+  ```grammar
+  A -> BCD 
+  B -> aCb | λ
+  C -> cAd | eBf | gDh | λ
+  D -> i
+  ```
+
+  * PRIM(D) = {i}
+  * PRIM(C) = {c, e, g, λ}
+  * PRIM(B) = {a, λ}
+  * PRIM(A) = {a, c, e, g, i}
+
+* Ejemplo 5:
+
+  ```grammar
+  S  -> aSe | B
+  B  -> bBe | C
+  C -> cCe | d
+  ```
+
+  * PRIM(S) = {a, b, c, d}
+  * PRIM(B) = {b, c, d}
+  * PRIM(C) = {c, d}
+
+* Ejemplo 6:
+
+  ```grammar
+  S -> ABe | C
+  A -> dB | aS | c
+  B -> AS | b
+  C -> b
+  ```
+
+  * PRIM(S) = {a, b, c, d}
+  * PRIM(A) = {a, c, d}
+  * PRIM(B) = {a, b, c, d}
+  * PRIM(C) = {b}
+
+* Ejemplo 7:
+
+  ```grammar
+  S  -> iCtP
+  C -> CoD | D | (C)
+  D -> DaE | E
+  E -> l
+  P -> P+Q | Q
+  Q -> Q*R | R
+  R -> d
+  ```
+
+  * PRIM(S) = {i}
+  * PRIM(C) = {(, l}
+  * PRIM(D) = {l}
+  * PRIM(E) = {l}
+  * PRIM(P) = {d}
+  * PRIM(Q) = {d}
+  * PRIM(R) = {d}
 
 ### Algoritmo Conjunto de Siguientes
 
@@ -104,21 +178,67 @@ Para (Produccion p : producciones) se pueden dar estas situaciones
 
 * Ejemplo 1:
 
-    ```grammar
-    S -> aST | b
-    T -> cT | d
-    ```
+  ```grammar
+  S -> aST | b
+  T -> cT | d
+  ```
 
   * SIG(S) = {$, c, d}
   * SIG(T) = {$, c, d}
 
 * Ejemplo 2:
 
-    ```grammar
-    S -> c(S,S) | g(S) | 1 | 2
-    ```
+  ```grammar
+  S -> c(S,S) | g(S) | 1 | 2
+  ```
 
   * SIG(S) = {$, ',', )}
+
+* Ejemplo 3:
+
+  ```grammar
+  P -> HDB |Pf 
+  H -> i | λ
+  D -> v|λ
+  B -> s |Dfd | λ
+  ````
+
+  * SIG(P) = {$, f}
+  * SIG(H) = {s, v, fd, $, f}
+  * SIG(D) = {s, v, fd, $, f}
+  * SIG(B) = {$, f}
+
+* Ejemplo 4:
+
+  ```grammar
+  S  -> aSe | B
+  B  -> bBe | C
+  C -> cCe | d
+  ```
+
+  * SIG(S) = {e, $}
+  * SIG(B) = {e}
+  * SIG(C) = {e}
+
+* Ejemplo 5:
+
+  ```grammar
+  S  -> iCtP
+  C -> CoD | D | (C)
+  D -> DaE | E
+  E -> l
+  P -> P+Q | Q
+  Q -> Q*R | R
+  R -> d
+  ```
+
+  * SIG(S) = {$}
+  * SIG(C) = {t, o, )}
+  * SIG(D) = {t, a}
+  * SIG(E) = {t, a}
+  * SIG(P) = {$, +}
+  * SIG(Q) = {$, +, *}
+  * SIG(R) = {$, +, *}
 
 ### Algoritmo Conjunto de Predicciones
 
@@ -162,21 +282,80 @@ Sino
 
 * Ejemplo 1: La siguiente GIC es LL(1) porque...
 
-    ```grammar
-    S -> aST | b
-    T -> cT | d
-    ```
+  ```grammar
+  S -> aST | b
+  T -> cT | d
+  ```
 
   * PRED(S -> aST) ∩ PRED(S -> b) = {a} ∩ {b} = {}
   * PRED(T -> cT) ∩ PRED(T -> d) = {c} ∩ {d} = {}
 
 * Ejemplo 2: La siguiente GIC es LL(1) porque...
 
-    ```grammar
-    S -> c(S,S) | g(S) | 1 | 2
-    ```
+  ```grammar
+  S -> c(S,S) | g(S) | 1 | 2
+  ```
 
   * PRED(S -> c(S,S)) ∩ PRED(S -> g(S)) ∩ PRED(S -> 1) ∩ PRED(S -> 2) = {c} ∩ {g} ∩ {1} ∩ {2} = {}
+
+* Ejemplo 3:
+
+  ```grammar
+  E -> TS
+  T -> +|-
+  S -> num|λ
+  ```
+
+  * PRED(E -> TS) = {+, -}
+  * PRED(T -> +) = {+}
+  * PRED(T -> -) = {-}
+  * PRED(S -> num) = {num}
+  * PRED(S -> λ) = {$}
+
+* Ejemplo 4:
+
+  ```grammar
+  S -> AB
+  A -> a | λ
+  B -> bCd
+  C -> c | λ
+  ```
+
+  * PRED(S -> AB) = {a, b}
+  * PRED(A -> a) = {a}
+  * PRED(A -> λ) = {b}
+  * PRED(B -> bCd) = {b}
+  * PRED(C -> c) = {c}
+  * PRED(C -> λ) = {d}
+
+* Ejemplo 5:
+
+  ```grammar
+  S -> aSe | B
+  B -> bBe | C
+  C -> cCe | d
+  ```
+
+  * PRED(S -> aSe) = {a}
+  * PRED(S -> B) = {b, c, d}
+  * PRED(B -> bBe) = {b}
+  * PRED(B -> C) = {c, d}
+  * PRED(C -> cCe) = {c}
+  * PRED(C -> e) = {d}
+
+* Ejemplo 6:
+
+  ```grammar
+  S  -> zMNz
+  M-> aMa|z
+  N -> bNb|z
+  ```
+
+  * PRED(S -> zMNz) = {z}
+  * PRED(M -> aMa) = {a}
+  * PRED(M -> z) = {z}
+  * PRED(N -> bNb) = {b}
+  * PRED(N -> z) = {z}
 
 ### Conversión a GIC LL(1)
 
@@ -266,3 +445,113 @@ Sino
 | $)2 | 2)$ | Emparejar(2) |
 | $) | )$ | Emparejar(')')|
 | $ | $ | accept |
+
+## Ejercicios
+
+1. Sea la siguiente gramática, comprobar si es LL(1) y si lo es, construir su tabla de análisis y verificar si la entrada siguiente es analizada correctamente: a b ( 0 ) a c a
+
+    ```grammar
+    S -> A | a
+    A -> b ( E ) S L
+    L -> c S | λ
+    E -> 0 | 1
+    ```
+
+    ```plain
+    PRIM(S) = {b, a}
+    PRIM(A) = {b}
+    PRIM(L)  = {c, λ}
+    PRIM(E) = {0, 1}
+    SIG(S) = {$, c}
+    SIG(A) = {$, c}
+    SIG(L) = {$, c}
+    SIG(E) = {)}
+    PRED(S -> A) = {b}
+    PRED(S -> a) = {a}
+    PRED(A -> b(E)SL) = {b}
+    PRED(L -> cS) = {c}
+    PRED(L -> λ) = {$, c}
+    PRED(E -> 0) = {0}
+    PRED(E -> 1) = {1}
+
+    Se observa que para L hay dos conjuntos de predicción con el mismo terminal, por lo que la gramática no es LL(1)
+    ```
+
+1. Hacer lo mismo que en caso anterior y si no es LL(1) hacer las modificaciones pertinentes (si se puede) para convertirla en LL(1). Construir su tabla de análisis y verificar si la entrada siguiente es analizada correctamente: z and or y x
+
+    ```grammar
+    S -> S or Q | Q
+    Q -> Q R | R
+    R -> F and | x | y
+    F -> z
+    ```
+
+    ```plain
+    No es LL(1) porque es recursiva por la izquierda. Se elimina esta recursividad.
+
+    S -> QS’ 
+    S’ -> orQS’
+    S’ -> λ
+    Q -> RQ’
+    Q’ -> RQ’
+    Q’ -> λ
+    R -> Fand 
+    R -> x
+    R -> y
+    F -> z
+
+    PRIM(S) = {z, x, y}
+    PRIM(S’) = {or, λ}
+    PRIM(Q) = {z, x, y}
+    PRIM(Q’) = {z, x, y, λ}
+    PRIM(R) = {z, x, y}
+    PRIM(F) = {z}
+    SIG(S) = {$}
+    SIG(S’) = {S}
+    SIG(Q) = {or, $}
+    SIG(Q’) = {or, $}
+    SIG(R) = {z, x, y, or, $}
+    SIG(F) = {and}
+    PRED(S -> QS’) = {z, x, y}
+    PRED(S’ -> orQS’) = {or}
+    PRED(S’ -> λ) = {$}
+    PRED(Q -> RQ’) = {z, x, y}
+    PRED(Q’ -> RQ’) = {z, x, y}
+    PRED(Q’ -> λ) = {or, $}
+    PRED(R -> Fand) = {z} 
+    PRED(R -> x) = {x}
+    PRED(R -> y) = {y}
+    PRED(F -> z) = {z}
+
+    Se observa que es LL(1).
+    ```
+
+|| or | and | x | y | z | $ |
+| -- | -- | -- | -- | -- | -- | -- |
+| S | error | error | S -> QS' | S -> QS' | S -> QS' | error |
+| S' | S’ -> orQS’ | error | error | error | error | S’ -> λ |
+| Q | error | error | Q -> RQ' | Q -> RQ' | Q -> RQ' | error |
+| Q' | Q' -> λ | error | Q' -> RQ' | Q' -> RQ' | Q' -> RQ' | Q' -> λ |
+| R | error | error | R -> x | R -> y | R -> Fand | error |
+| F | error | error | error | error | F -> z | error |
+
+| Pila | Entrada | Regla o Acción |
+| -- | -- | -- |
+| $ S | z and or y x $ | S -> QS’ |
+| $ S’ Q | z and or y x $ | Q -> RQ’ |
+| $ S’ Q’ R | z and or y x $ | R -> Fand |
+| $ S’ Q’ and F | z and or y x $ | F -> z |
+| $ S’ Q’ and z | z and or y x $ | Emparejar(z) |
+| $ S’ Q’ and | and or y x $ | Emparejar(and) |
+| $ S’ Q’ | or y x $ | Q’ -> λ |
+| $ S’ | or y x $ | S’ -> orQS’ |
+| $ S’ Q or | or y x $ | Emparejar(or) |
+| $ S’ Q | y x $ | Q -> RQ’ |
+| $ S’ Q’ R  | y x $ | R -> y |
+| $ S’ Q’ y | y x $ | Emparejar(y) |
+| $ S’ Q’ | x $ | Q’ -> RQ’ |
+| $ S’ Q’ R | x $ | R -> x |
+| $ S’ Q’ x | x $ | Emparejar(x) |
+| $ S’ Q’ | $ | Q’ -> λ |
+| $ S’ | $ | S’ -> λ |
+| $ | $ | Aceptar |
