@@ -126,7 +126,7 @@ T -> cT | d
 | aabcdd | accept |
 
 * Tipos de análisis:
-  * **Análisis Sintácico Descendente con retroceso** -> ASD con retroceso
+  * **Análisis Sintáctico Descendente con retroceso** -> ASD con retroceso
   * **Análisis Sintáctico Descendente Predictivo** -> ASDP LL(1)
 
 ### Análisis Sintáctico Ascendente (ASA)
@@ -167,7 +167,7 @@ T -> cT | d
     | S | accept |
 
 * Tipos de análisis:
-  * **Análisis Sintácico Ascendente con retroceso** -> ASA con retroceso
+  * **Análisis Sintáctico Ascendente con retroceso** -> ASA con retroceso
   * **Análisis Sintáctico Ascendente Predictivo** -> ASAP SLR
 
 ## Diagrama de sintaxis
