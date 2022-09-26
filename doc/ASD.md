@@ -507,7 +507,7 @@ Sino
     PRIM(R) = {z, x, y}
     PRIM(F) = {z}
     SIG(S) = {$}
-    SIG(S’) = {S}
+    SIG(S’) = {$}
     SIG(Q) = {or, $}
     SIG(Q’) = {or, $}
     SIG(R) = {z, x, y, or, $}
