@@ -137,7 +137,7 @@ Paso 4: Armar la tabla de parsing
 | 0 1 6| id$ | D(5) |
 | 0 1 6 5 | $ | R(6) F -> id (se desapila 1 símbolo) |
 | 0 1 6 3 | $ | R(4)  T -> F (se desapila 1 símbolo) |
-| 0 1 6 9 | $ | R(1) F -> E + T (se desapilan 3 símbolos) |
+| 0 1 6 9 | $ | R(1) E -> E + T (se desapilan 3 símbolos) |
 | 0 1 | $ | accept |
 
 * Ejemplo 2:
