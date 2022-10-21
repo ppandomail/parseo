@@ -1,0 +1,135 @@
+# UNIVERSIDAD NACIONAL DE HURLINGHAM
+
+## Inst. de Tecnología e Ingeniería
+
+## PARSEO Y GENERACIÓN DE CÓDIGO
+
+### Profesor: Mag. Ing. Pablo Pandolfo
+
+---
+
+### Parcial octubre 2022
+
+* ALUMNO:  
+* LU:
+* CARRERA:
+
+---
+
+### NOTA: EL EXAMEN ESCRITO ES UN DOCUMENTO DE GRAN IMPORTANCIA PARA LA EVALUACIÓN DE LOS CONOCIMIENTOS ADQUIRIDOS, POR LO TANTO, SE SOLICITA LEER ATENTAMENTE LO SIGUIENTE
+
+* Responda claramente cada punto, detallando con la mayor precisión posible lo solicitado.
+* Sea prolijo y ordenado en el desarrollo de los temas.
+* Sea cuidadoso con las faltas de ortografía y sus oraciones.
+* No desarrollar el examen en lápiz.
+* Aprobación del examen: Con nota mayor o igual a 4 (cuatro)
+* Condiciones de aprobación: 60%
+* Duración de examen: 2 horas.
+
+---
+
+1. [2 puntos]: Constrúyase la tabla de transiciones para un scanner del lenguaje L sobre el Σ = {letra, digito} cuyas palabras verifican las siguientes restricciones:
+    * Si una palabra tiene menos de cinco letras, entonces tiene un número par de letras.
+    * Si una palabra tiene cinco letras o más, entonces contiene un número impar de letras.
+    * Cualquier palabra contiene al menos una letra.
+
+    * **Solución:**
+
+    | Q | letra | digito | token | retroceso |
+    | -- | -- | -- | -- | -- |
+    | q0 | q1 | q0 | - | - |
+    | q1 | q2 | q1 | - | - |
+    | q2 | q3 | q2 | accept | 0 |
+    | q3 | q4 | q3 | - | - |
+    | q4 | q5 | q4 | accept | 0 |
+    | q5 | q6 | q5 | accept | 0 |
+    | q6 | q5 | q6 | - | - |
+
+1. [3 puntos]: Compruébese si la siguiente gramática es LL(1), mostrando los conjuntos primeros, siguientes y predicciones.
+
+    ```grammar
+    E -> yE'E''
+    E'' -> xE'' | λ
+    E' -> A | B
+    B -> bB'
+    B' -> A | bA
+    A -> λ
+    ```
+
+    * **Solución:**
+    * PRIM(E) = {y}
+    * PRIM(E') = {λ, b}
+    * PRIM(E'') = {x, λ}
+    * PRIM(B) = {b}
+    * PRIM(B') = {λ, b}
+    * PRIM(A) = {λ}
+
+    * SIG(E) = {$}
+    * SIG(E') = {$}
+    * SIG(E'') = {x, $}
+    * SIG(B) = {x, $}
+    * SIG(B') = {x, $}
+    * SIG(A) = {x, $}
+
+    | | x | y | b | $ |
+    | -- | -- | -- | -- | -- |
+    | E | error | yE'E'' | error | error |
+    | E' | A | error | B | A |
+    | E'' | xE'' | error | error | λ |
+    | B | error | error | bB' | error |
+    | B' | A | error | bA | A |
+    | A | λ | error | error | λ |
+
+1. [1 punto]: Muéstrese los movimientos realizados por el analizador sintáctico descendente predictivo con la entrada ybxx
+
+    * **Solución:**
+
+    | Pila | Entrada | Salida |
+    | -- | -- | -- |
+    | $E | ybxx$ | E -> yE'E'' |
+    | $E''E'y | ybxx$ | emparejar(y) |
+    | $E''E' | bxx$ | E' -> B |
+    | $E''B | bxx$ | B -> bB' |
+    | $E''B'b | bxx$ | emparejar(b) |
+    | $E''B' | xx$ | B' -> A |
+    | $E''A | xx$ | A -> λ |
+    | $E'' | xx$ | E'' -> xE'' |
+    | $E''x | xx$ | emparejar(x) |
+    | $E'' | x$ | E'' -> xE'' |
+    | $E''x | x$ | emparejar(x) |
+    | $E'' | $ | E'' -> λ |
+    | $ | $ | Accept |
+
+1. [3 puntos]: Constrúyase la tabla de parsing canónica para la siguiente gramática: P = {(S -> CC), (C -> cC), (C -> d)}
+
+    * **Solución:**
+
+    | Q | c | d | $ | S | C |
+    | -- | -- | -- | -- | -- | -- |
+    | 0 | D(3) | D(4) | | 1 | 2 |
+    | 1 | | | OK | | |
+    | 2 | D(6) | D(7) | | | 5 |
+    | 3 | D(3) | D(4) | | | 8 |
+    | 4 | R(3) | R(3) | | | |
+    | 5 | | | R(1) | | |
+    | 6 | D(6) | D(7) | | | 9 |
+    | 7 | | | R(3) | | |
+    | 8 | R(2) | R(2) | | | |
+    | 9 | | | R(2) | | |
+
+1. [1 punto]: Muéstrese los movimientos realizados por el analizador sintáctico ascendente predictivo con la entrada cdd
+
+    * **Solución:**
+
+    | Pila | Entrada | Acción |
+    | -- | -- | -- |
+    | 0 | cdd$ | D(3) |
+    | 03 | dd$ | D(4) |
+    | 034 | d$ | R(3): C -> d |
+    | 038 | d$ | R(2): C -> cC |
+    | 02 | d$ | D(7) |
+    | 027 | $ | R(3): C -> d |
+    | 025 | $ | R(1): S -> CC |
+    | 01 | $ | accept |
+
+---
