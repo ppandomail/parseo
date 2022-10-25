@@ -65,20 +65,30 @@
     * PRIM(A) = {λ}
 
     * SIG(E) = {$}
-    * SIG(E') = {$}
-    * SIG(E'') = {x, $}
+    * SIG(E') = {x, $}
+    * SIG(E'') = {$}
     * SIG(B) = {x, $}
     * SIG(B') = {x, $}
     * SIG(A) = {x, $}
 
+    * PRED(E -> yE'E'') = {y}
+    * PRED(E'' -> xE'') = {x}
+    * PRED(E'' -> λ) = {$}
+    * PRED(E' -> A) = {x, $}
+    * PRED(E' -> B) = {b}
+    * PRED(B -> bB') = {b}
+    * PRED(B' -> A) = {x, $}
+    * PRED(B' -> bA) = {b}
+    * PRED(A -> λ) = {x, $}
+
     | | x | y | b | $ |
     | -- | -- | -- | -- | -- |
-    | E | error | yE'E'' | error | error |
-    | E' | A | error | B | A |
-    | E'' | xE'' | error | error | λ |
-    | B | error | error | bB' | error |
-    | B' | A | error | bA | A |
-    | A | λ | error | error | λ |
+    | E | error | E -> yE'E'' | error | error |
+    | E' | E' -> A | error | E' -> B | E' -> A |
+    | E'' | E'' -> xE'' | error | error | E'' -> λ |
+    | B | error | error | B -> bB' | error |
+    | B' | B' -> A | error | B' -> bA | B' -> A |
+    | A | A -> λ | error | error | A -> λ |
 
 1. [1 punto]: Muéstrese los movimientos realizados por el analizador sintáctico descendente predictivo con la entrada ybxx
 
