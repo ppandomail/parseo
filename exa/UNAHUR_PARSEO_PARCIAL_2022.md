@@ -45,7 +45,7 @@
     | q5 | q6 | q5 | accept | 0 |
     | q6 | q5 | q6 | - | - |
 
-1. [3 puntos]: Compruébese si la siguiente gramática es LL(1), mostrando los conjuntos primeros, siguientes y predicciones.
+1. [3 puntos]: Compruébese si la siguiente gramática es LL(1), mostrando los conjuntos PRIM, SIG y PRED.
 
     ```grammar
     E -> yE'E''
@@ -58,19 +58,17 @@
 
     * **Solución:**
     * PRIM(E) = {y}
-    * PRIM(E') = {λ, b}
     * PRIM(E'') = {x, λ}
+    * PRIM(E') = {λ, b}
     * PRIM(B) = {b}
     * PRIM(B') = {λ, b}
     * PRIM(A) = {λ}
-
     * SIG(E) = {$}
-    * SIG(E') = {x, $}
     * SIG(E'') = {$}
+    * SIG(E') = {x, $}
     * SIG(B) = {x, $}
     * SIG(B') = {x, $}
     * SIG(A) = {x, $}
-
     * PRED(E -> yE'E'') = {y}
     * PRED(E'' -> xE'') = {x}
     * PRED(E'' -> λ) = {$}
@@ -90,7 +88,7 @@
     | B' | B' -> A | error | B' -> bA | B' -> A |
     | A | A -> λ | error | error | A -> λ |
 
-1. [1 punto]: Muéstrese los movimientos realizados por el analizador sintáctico descendente predictivo con la entrada ybxx
+1. [1 punto]: Muéstrese los movimientos realizados por el ASDP con la entrada ybxx
 
     * **Solución:**
 
@@ -114,18 +112,41 @@
 
     * **Solución:**
 
+    ```grammar
+       S' -> S
+    R1 S -> CC
+    R2 C -> cC
+    R3 C -> d
+
+    SIG(S) = {$}
+    SIG(C) = {c, d, $}
+
+
+      (0)              (1)
+    S'-> .S  __ S __ S'-> S.
+    S -> .CC           (2)               (5)
+    C -> .cC __ C __ S -> C.C  __ C __ S -> CC. 
+    C -> .d          C -> .cC
+                     C -> .d
+                       (3)               (6)
+            __  c __ C -> c.C  __ C __ C -> cC.   
+                     C -> .cC
+                     C -> .d
+                       (4)
+            __  d __ C -> .d          
+
+    Luego: (2,c)=3; (2,d)=4; (3,c)=3; (3,d)=4    
+    ```
+
     | Q | c | d | $ | S | C |
     | -- | -- | -- | -- | -- | -- |
     | 0 | D(3) | D(4) | | 1 | 2 |
     | 1 | | | OK | | |
-    | 2 | D(6) | D(7) | | | 5 |
-    | 3 | D(3) | D(4) | | | 8 |
-    | 4 | R(3) | R(3) | | | |
+    | 2 | D(3) | D(4) | | | 5 |
+    | 3 | D(3) | D(4) | | | 6 |
+    | 4 | R(3) | R(3) | R(3) | | |
     | 5 | | | R(1) | | |
-    | 6 | D(6) | D(7) | | | 9 |
-    | 7 | | | R(3) | | |
-    | 8 | R(2) | R(2) | | | |
-    | 9 | | | R(2) | | |
+    | 6 | R(2) | R(2) | R(2) | | |
 
 1. [1 punto]: Muéstrese los movimientos realizados por el analizador sintáctico ascendente predictivo con la entrada cdd
 
@@ -136,9 +157,9 @@
     | 0 | cdd$ | D(3) |
     | 03 | dd$ | D(4) |
     | 034 | d$ | R(3): C -> d |
-    | 038 | d$ | R(2): C -> cC |
-    | 02 | d$ | D(7) |
-    | 027 | $ | R(3): C -> d |
+    | 036 | d$ | R(2): C -> cC |
+    | 02 | d$ | D(4) |
+    | 024 | $ | R(3): C -> d |
     | 025 | $ | R(1): S -> CC |
     | 01 | $ | accept |
 
