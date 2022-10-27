@@ -197,6 +197,19 @@
         ```
 
     1. Sustituya las apariciones de un número de la semana (de 1 a 7) por su correspondiente nombre de día.
+        
+        ```plain
+          %% 
+          1     { System.out.print("Lunes"); }
+          2     { System.out.print("Martes"); }
+          3     { System.out.print("Miércoles"); }
+          4     { System.out.print("Jueves"); }
+          5     { System.out.print("Viernes"); }
+          6     { System.out.print("Sabado"); }
+          7     { System.out.print("Domingo"); }
+          .     { System.out.print("No es un día de la semana"); }
+        ```
+        
     1. Sustituya los operadores de suma +, resta -, producto * y división / y potencia ^ por la cadena "OPERADOR“.
     1. Sustituya las apariciones de un número escrito en base hexadecimal por la cadena "HEXADECIMAL".
     1. Escriba en mayúsculas todas las palabras de un texto que comienzan por mayúsculas. (Considere que una palabra es una secuencia constituida por letras minúsculas o mayúsculas).
