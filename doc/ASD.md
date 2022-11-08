@@ -56,7 +56,7 @@ S -> c(S,S) | g(S) | 1 | 2
 Sea A -> a1...an una producción
 
 Si (a1...an  =  λ) 
-    PRIM(a1...an) = {λ
+    PRIM(a1...an) = {λ}
 Sino    
     Si (a1 ∈ ΣT)
         PRIM(a1...an) = {a1} 

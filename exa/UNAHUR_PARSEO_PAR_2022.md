@@ -45,7 +45,7 @@
     | q5 | q6 | q5 | accept | 0 |
     | q6 | q5 | q6 | - | - |
 
-1. [3 puntos]: Compruébese si la siguiente gramática es LL(1), mostrando los conjuntos PRIM, SIG y PRED.
+1. [3 puntos]: Compruébese si la siguiente GIC es LL(1), mostrando los conjuntos PRIM, SIG y PRED.
 
     ```grammar
     E -> yE'E''
@@ -88,7 +88,7 @@
     | B' | B' -> A | error | B' -> bA | B' -> A |
     | A | A -> λ | error | error | A -> λ |
 
-1. [1 punto]: Muéstrese los movimientos realizados por el ASDP con la entrada ybxx
+1. [1 punto]: Muéstrese los movimientos realizados por el ASDP LL(1) con la entrada ybxx
 
     * **Solución:**
 
@@ -106,9 +106,9 @@
     | $E'' | x$ | E'' -> xE'' |
     | $E''x | x$ | emparejar(x) |
     | $E'' | $ | E'' -> λ |
-    | $ | $ | Accept |
+    | $ | $ | accept |
 
-1. [3 puntos]: Constrúyase la tabla de parsing canónica para la siguiente gramática: P = {(S -> CC), (C -> cC), (C -> d)}
+1. [3 puntos]: Constrúyase la tabla de parsing SLR para la siguiente GIC: P = {(S -> CC), (C -> cC), (C -> d)}
 
     * **Solución:**
 
@@ -133,7 +133,7 @@
                      C -> .cC
                      C -> .d
                        (4)
-            __  d __ C -> .d          
+            __  d __ C -> d.          
 
     Luego: (2,c)=3; (2,d)=4; (3,c)=3; (3,d)=4    
     ```
@@ -148,7 +148,7 @@
     | 5 | | | R(1) | | |
     | 6 | R(2) | R(2) | R(2) | | |
 
-1. [1 punto]: Muéstrese los movimientos realizados por el analizador sintáctico ascendente predictivo con la entrada cdd
+1. [1 punto]: Muéstrese los movimientos realizados por el ASAP SLR con la entrada cdd
 
     * **Solución:**
 
