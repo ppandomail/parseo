@@ -1,0 +1,126 @@
+import java_cup.runtime.*;
+import java.util.function.Consumer;
+
+action code
+{:
+    static FunctionAdapter funcionAdapter = new FunctionAdapter();
+
+    public static void ejecutarFuncion (Integer num, String param){ 
+		for (int i = 0; i < num; i++) {
+            funcionAdapter.exec(param);
+            Tablero.imprimirTablero();
+		};
+	};
+
+    public static void ponerEnTablero(String color){
+        funcionAdapter.poner();
+        ejecutarFuncion(1, color);
+    };
+
+    public static void sacarDelTablero(String color){
+        funcionAdapter.sacar();
+        ejecutarFuncion(1, color);
+    };
+
+    public static void moverPuntero(String direccion){
+        funcionAdapter.mover();
+        ejecutarFuncion(1, direccion);
+    };
+:}
+
+
+terminal PONER, MOVER, SACAR, START, END, LPAREN, RPAREN, COMMA, SCOLON, LBRACE, RBRACE, TABLERO, REPEAT, NEG, HAYCOLOR, IF;
+terminal String DIR, COLOR;
+terminal Integer NUMBER;
+non terminal program, initial, listaDeclaraciones, declaracion, instruccion, loop, cond;
+non terminal Tablero tablero;
+non terminal Boolean hayColor;
+non terminal String mover, poner, sacar;
+
+program ::= initial START listaDeclaraciones END
+    {:
+        Tablero.imprimirTablero();
+        System.out.println("[Sintaxis completada satisfactoriamente]"); 
+    :};
+
+initial ::= tablero 
+    {:
+        Tablero.imprimirTablero();
+    :};
+
+tablero ::= TABLERO LPAREN NUMBER:n1 COMMA NUMBER:n2 RPAREN SCOLON
+    {:
+        RESULT = new Tablero(n1, n2);
+    :};
+
+listaDeclaraciones ::= listaDeclaraciones declaracion 
+                    | declaracion;
+
+declaracion ::= instruccion | loop | cond;
+
+instruccion ::= poner:c
+    {:
+        ponerEnTablero(c);
+    :};
+
+instruccion ::= mover:d
+    {:
+        moverPuntero(d);
+    :};
+
+instruccion ::= sacar:c
+    {:
+        sacarDelTablero(c);
+    :};
+
+loop ::= REPEAT LPAREN NUMBER:n RPAREN LBRACE poner:c RBRACE SCOLON
+    {:
+        funcionAdapter.poner();
+        ejecutarFuncion(n, c);
+    :};
+
+loop ::= REPEAT LPAREN NUMBER:n RPAREN LBRACE mover:d RBRACE SCOLON
+    {:  
+        funcionAdapter.mover();
+        ejecutarFuncion(n, d);
+    :};
+
+loop ::= REPEAT LPAREN NUMBER:n RPAREN LBRACE sacar:c RBRACE SCOLON
+    {:  
+        funcionAdapter.sacar();
+        ejecutarFuncion(n, c);        
+    :};
+
+cond ::= IF LPAREN hayColor:b RPAREN LBRACE poner:c RBRACE SCOLON
+    {:
+        if(b){
+            ponerEnTablero(c);
+        }
+    :};
+
+cond ::= IF LPAREN NEG hayColor:b RPAREN LBRACE poner:c RBRACE SCOLON
+    {:
+        if(!b){
+            ponerEnTablero(c);
+        }
+    :};
+
+hayColor ::= HAYCOLOR LPAREN COLOR:c RPAREN
+    {:
+        RESULT = Tablero.hayColor(String.valueOf(c.charAt(0)));
+    :};
+
+mover ::= MOVER LPAREN DIR:d RPAREN SCOLON
+    {:
+        RESULT = String.valueOf(d.charAt(0));
+    :};
+
+poner ::= PONER LPAREN COLOR:c RPAREN SCOLON
+    {:
+        RESULT = String.valueOf(c.charAt(0));
+    :};
+
+sacar ::= SACAR LPAREN COLOR:c RPAREN SCOLON
+    {:
+        RESULT = String.valueOf(c.charAt(0));
+    :};

@@ -3,7 +3,7 @@
 * Es un generador de scanners.
 * Generador de programas java diseñado para procesamiento léxico.
 * Parte de un conjunto de reglas léxicas.
-* JLex produce un programa llamado Yylex que reconoce las cadenas que cumplen dichas reglas.
+* [Descarga](https://www.cs.princeton.edu/~appel/modern/java/JLex/)
 
 ![JFlex](img/jlex.png)
 
@@ -31,7 +31,7 @@
 * El contenido se copia tal y como aparece en la especificación, al principio del código fuente generado por JFlex.
 * Se pone, por ejemplo, el package, las importaciones de clases que se podrían necesitar:
 
-  ```plain
+  ```java
   import java_cup.runtime.Symbol;
   import java.io.*;
   ```

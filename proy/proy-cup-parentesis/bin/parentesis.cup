@@ -1,0 +1,9 @@
+import java_cup.runtime.*;
+
+terminal PARABRE,PARCIERRA;
+
+non terminal INICIO;
+
+start with INICIO;
+
+INICIO ::= PARABRE INICIO PARCIERRA | PARABRE PARCIERRA;

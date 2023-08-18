@@ -1,0 +1,49 @@
+import java_cup.runtime.*;
+
+/* Terminales sin atributo */
+terminal PUNTOYCOMA, MAS, MENOS, POR, DIVISION, MODULO, POTENCIA;
+terminal LPAREN, RPAREN;
+
+/* Terminales con atributo asociado */
+terminal Integer NUMERO;
+
+/* No terminales sin atributo */
+non terminal lista_expr;
+
+/* No terminales con atributo asociado */
+non terminal Integer expr;
+
+/* Precedencias */
+precedence left MAS, MENOS;
+precedence left POR, DIVISION, MODULO, POTENCIA;
+
+/* Gramática */
+lista_expr ::= lista_expr expr:e PUNTOYCOMA 
+			   {: System.out.println("= " + e); :}
+
+			| lista_expr error PUNTOYCOMA
+			| /* Lambda */
+			;
+
+expr ::= expr:e1 MAS expr:e2
+		{: RESULT = new Integer(e1.intValue() + e2.intValue()); :}
+		| expr:e1 MENOS expr:e2
+		{: RESULT = new Integer(e1.intValue() - e2.intValue()); :}
+		| expr:e1 POR expr:e2
+		{: RESULT = new Integer(e1.intValue() * e2.intValue()); :}
+		| expr:e1 DIVISION expr:e2
+		{: 
+			if (e2.intValue() != 0)
+				RESULT = new Integer(e1.intValue() / e2.intValue());
+			else
+				RESULT = 0; 
+		:}
+		| expr:e1 MODULO expr:e2
+		{: RESULT = new Integer(e1.intValue() % e2.intValue()); :}
+		| expr:e1 POTENCIA expr:e2
+		{: RESULT = new Integer(new Double(Math.pow(e1.intValue(), e2.intValue())).intValue()); :}
+		| NUMERO:n
+		{: RESULT = n; :}
+		| LPAREN expr:e RPAREN
+		{: RESULT = e; :}
+		;
