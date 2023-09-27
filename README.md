@@ -24,6 +24,7 @@
     1. [ANTLR](doc/antlr.md)
     1. [Bison](doc/bison.md)
     1. [PLY](doc/ply.md)
+    1. [PetitParser](doc/petitparser.md)
 1. Análisis Semántico
     1. [TT y TS](doc/tablas.md)
     1. [Analizador Semántico](doc/semantico.md)
