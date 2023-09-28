@@ -23,6 +23,8 @@
 * El lenguaje debe ser representado con unas reglas únicas y bien formadas de manera que el Parser funcione de una manera bien definida.
 * Es decir, el lenguaje debe ser formal (tener unas reglas bien definidas). A estas reglas se las llama gramática.
 * Por lo tanto, el primer paso para poder implementar un AS es definir la gramática que debe ser capaz de analizar.
+* Una gramática es una especificación (formal) de un conjunto de strings válidos (programas)
+* La gramática no explica el “significado” de las partes del programa.
 * Ejemplo: "Cobertorzinho"
 
 ```grammar
@@ -32,9 +34,10 @@
 <exp> ::= costurar(<exp>,<exp>)
 ```
 
-## Diseño de GIC
+## Diseño de Gramáticas Independientes/Libre de Contexto (GIC)
 
-* Una Gramática Independiente de Contexto (GIC) se define por tuplas de 4 elementos:
+* Una GIC es aquella en donde sus reglas de producción se pueden aplicar sin considerar el contexto del no-terminal
+* Una GIC se define por tuplas de 4 elementos:
   * ΣT: conjunto finito de símbolos terminales
   * ΣN: conjunto finito de símbolos no terminales
   * P: conjunto de reglas de reescritura o producción
@@ -213,6 +216,31 @@ T -> cT | d
     } while (token != EOF);
   }
   ```
+
+## Tools(Parser(Languages(Program)))
+
+* Un desarrollador está expuesto a un número creciente de tecnología de parsing:
+  * (mini) Herramientas
+    * Pretty Print (... a colores!!)
+    * Autocompletado de código
+    * AI (Copilot,  Tabnine, Kite)
+  * Herramientas
+    * Refactoring
+    * Crítica de Código y CodeSmells
+    * Source Base Project Analytics
+
+* Por ejemplo: Como se implementa el formateo automático o los colores en el código fuente?
+
+* Programa: al menos un lenguaje
+* Lenguajes: Gramática (sintaxis+) y Semántica de operación (y denotativa)
+* Parsers
+  * "Analizan" la validez de un texto como programa
+  * Consideran la gramática de un lenguaje
+  * Se basan en el AST (abstract syntax trees)
+* Herramientas
+  * Analizar/Mantener/Documentar
+  * Refactorizar/Optimizar
+  * Migrar/Reescribir
 
 ## Ejercicios
 

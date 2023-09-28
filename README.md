@@ -29,6 +29,8 @@
     1. [TT y TS](doc/tablas.md)
     1. [Analizador Semántico](doc/semantico.md)
 1. [Generación de Código](doc/generacion.md)
+1. [Code Smells](doc/codesmells.md)
+1. [Refactoring](doc/refactoring.md)
 
 ## Bibliografía
 

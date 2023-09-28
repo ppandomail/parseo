@@ -8,7 +8,7 @@
 * Permite crear DSLs:
   * DSL: Domain Specific Language es un lenguaje especifico para un dominio o negocio
   * DSL: dominio + sintaxis + semántica
-
+* [Sitio Web](https://tomassetti.me/antlr-mega-tutorial/)
 
 ## Instalación Windows
 
@@ -297,3 +297,23 @@ COMMENT : '/*' .*? '*/' -> skip ;
 
 LINE_COMMENT : '#-- ' .*? [\r\n] -> skip ;
 ```
+
+## lab.antlr.org
+
+* Es una herramienta para desarrollar y probar gramáticas
+
+![ANTLR](img/antlr1.png)
+
+![ANTLR](img/antlr2.png)
+
+## Ejercicios
+
+1. Visite la página [](http://lab.antlr.org/)
+2. Seleccione
+    * Lexer: Sample
+    * Parser: Sample
+    * Input: Sampe.expr
+3. Corra ("run") el ejemplo e interprete el resultado
+    * Cual es el problema?
+    * Modifique el ejemplo (lexer o parser) para solucionar el problema
+    * Modifique el ejemplo para agregar el operador lógico "xor"
