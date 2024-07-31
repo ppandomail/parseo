@@ -6,37 +6,29 @@
 
 ## Objetivos
 
-* Analizar y evaluar características de un traductor para su inclusión en un proyecto de informática.
-* Desarrollar traductores.
-* Entender cómo se construyen (decisiones de diseño).
+* Analizar y evaluar características de un traductor para su inclusión en un proyecto de informática
+* Desarrollar traductores
+* Entender cómo se construyen (decisiones de diseño)
 
 ## Programa
 
-1. [Introducción](doc/intro.md)
-1. Análisis Léxico
-    1. [Scanner](doc/scanner.md)
-    1. [JFlex](doc/jflex.md)
-1. Análisis Sintáctico
-    1. [Parser](doc/parser.md)
-    1. [ASD](doc/ASD.md)
-    1. [ASA](doc/ASA.md)
-    1. [CUP](doc/cup.md)
-    1. [ANTLR](doc/antlr.md)
-    1. [Bison](doc/bison.md)
-    1. [PLY](doc/ply.md)
-    1. [PetitParser](doc/petitparser.md)
-1. Análisis Semántico
-    1. [TT y TS](doc/tablas.md)
-    1. [Analizador Semántico](doc/semantico.md)
-1. [Generación de Código](doc/generacion.md)
-1. [Code Smells](doc/codesmells.md)
-1. [Refactoring](doc/refactoring.md)
+| Unidad | Contenido | Herramientas | Ejercicios |
+| -- | -- | -- | -- |
+| 01 | [Introducción](doc/01-intro-contenido.md)  |                                                |                                               |
+| 02 | [Scanner](doc/02-scanner-contenido.md)     | [Herramientas](doc/02-scanner-herramientas.md) | [Ejercicios](doc/02-scanner-ejercicios.md)    |
+| 03 | [Parser](doc/03-parser-contenido.md)       | [Herramientas](doc/03-parser-herramientas.md)  | [Ejercicios](doc/03-parser-ejercicios.md)     |
+| 04 | [ASD](doc/04-parser-asd-contenido.md)      |                                                | [Ejercicios](doc/04-parser-asd-ejercicios.md) |
+| 05 | [ASA](doc/05-parser-asa-contenido.md)      |                                                | [Ejercicios](doc/05-parser-asa-ejercicios.md) |
+| 06 | [TT y TS](doc/06-tablas-contenido.md)      |                                                | [Ejercicios](doc/06-tablas-ejercicios.md)     |
+| 07 | [Semántico](doc/07-semantico-contenido.md) |                                                | [Ejercicios](doc/07-semantico-ejercicios.md)  |
+| 08 | [G. Código](doc/08-generacion-contenido.md)    |                                            |                                               |
+| 09 | [Code Smells](doc/09-codesmells-contenido.md)  |                                            |                                               |
+| 10 | [Refactoring](doc/10-refactoring-contenido.md) |                                            |                                               |
 
 ## Bibliografía
 
 * [Compiladores: Principios, técnicas y herramientas (Alfred Aho)](biblio/)
 * [Compiladores. Teoría e implementación (Jacinto Ruiz Catalán)](biblio/)
-* [Apuntes (Pablo Pandolfo)](doc/)
 
 ## Condiciones para aprobar
 
@@ -47,9 +39,9 @@
 
 ## TP
 
-1. Definir y describir un lenguaje de programación.
-1. Declarar directivas jlex (expresiones regulares).
-1. Declarar directivas cup (gramática).
-1. Declarar y programar acciones semánticas para cada una de las producciones de la gramática.
-1. Mostrar la ejecución de diferentes programas (casos de errores y éxitos).
-1. Conclusiones.
+1. Definir y describir un lenguaje de programación
+1. Implementar scanner
+1. Implementar parser
+1. Implementar acciones semánticas
+1. Casos de prueba automatizados
+1. Conclusiones

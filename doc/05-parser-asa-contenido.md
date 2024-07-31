@@ -15,11 +15,12 @@
 
 ## Algoritmo de desplazamiento y reducción
 
-* Operaciones:
-  * **Shift**: pasar un símbolo de la entrada al tope de la pila y se pide el siguiente símbolo al analizador léxico.
-  * **Reduce**: reemplazar en el tope de la pila el lado derecho de una regla gramatical por el lado izquierdo de la misma.
-  * **Accept**: se acepta la palabra.
-  * **Reject**: se rechaza la palabra.
+| Operación | |
+| -- | -- |
+| **Shift**  | pasar un símbolo de la entrada al tope de la pila y se pide el siguiente símbolo al scanner |
+| **Reduce** | reemplazar en el tope de la pila el lado derecho de una regla gramatical por el lado izquierdo de la misma |
+| **Accept** | se acepta la palabra |
+| **Reject** | se rechaza la palabra |
 
 * Hay varios tipos de ASA:
   * Análisis con retroceso: ASA con retroceso
@@ -298,70 +299,8 @@ L’ -> λ
 ## Conflictos en las tablas SLR
 
 * Hay dos posibles conflictos a la hora de construir una tabla SLR:
-  * **Desplazamiento-reducción**: se produce cuando en una misma celda se puede poner un desplazamiento y una reducción. Esto significa que la gramática no es SLR. Se puede resolver una de las dos opciones adecuada para que el analizador reconozca el lenguaje descrito por la gramática.
-  * **Reducción-reducción**: aparece cuando en una misma celda es posible reducir de dos maneras diferentes. Esto también implica que la gramática no es SLR. Su solución puede ser elegir una de las dos reducciones, teniendo cuidado de que el analizador reconozca bien el lenguaje definido por la gramática. También se puede optar por modificar la gramática para que eso no ocurra.
 
-## Ejercicios
-
-1. Para la siguiente gramática, construir el autómata y la tabla de análisis SLR:
-
-    ```grammar
-    S -> id X | id Y end
-    X -> otro | λ
-    Y -> begin X end | λ
-    ```
-
-    | Q | id | end | begin | otro | $ | S | X | Y |
-    | -- | -- | -- | -- | -- | -- | --  | -- | -- |
-    | 0 | D(2) | | | | | 1 | | |
-    | 1 | | | | | OK | | | |
-    | 2 | | R(4)/R(6) | D(7) | D(3) | R(4) | | 4 | 5 |
-    | 3 | | R(3) | | | R(3) | | | |
-    | 4 | | | | | R(1) | | | |
-    | 5 | | D(6) | | | | | | |
-    | 6 | | | | | R(2) | | | |
-    | 7 | | R(4) | | D(3) | D(4) | | 8 | |
-    | 8 | | D(9) | | | | | | |
-    | 9 | | R(5) | | | | | | |
-
-1. Para la siguiente gramática:
-
-    ```grammar
-    D -> var V : T ;
-    V -> id , V | id
-    T -> int | bool
-    ```
-
-    1. Construir el autómata.
-    1. Construir la tabla de análisis SLR.
-    1. Analizar la palabra var id , id : int ;
-
-    | Q | var | : | ; | id | , | int | bool | $ | D | V | T |
-    | -- | -- | -- | -- | -- | -- | --  | -- | -- | -- | -- | -- |
-    | 0 | D(2) | | | | | | | | 1 | | |
-    | 1 | | | | | | | | OK | | | |
-    | 2 | | | | D(4) | | | | | | 3 | |
-    | 3 | | D(5) | | | | | | | | | |
-    | 4 | | R(3) | | | D(6) | | | | | | |
-    | 5 | | | | | | D(8) | D(9) | | | | 7 |
-    | 6 | | | | D(4) | | | | | | 10 | |
-    | 7 | | | D(11) | | | | | | | | |
-    | 8 | | | R(4) | | | | | | | | |
-    | 9 | | | R(5) | | | | | | | | |
-    | 10 | | R(2) | | | | | | | | | |
-    | 11 | | | | | | | | R(1) | | | |
-
-    | Pila | Entrada | Acción |
-    | -- | -- | -- |
-    | 0 | var id , id : int ; $ | D(2) |
-    | 0 2 | id , id : int ; $ | D(4) |
-    | 0 2 4 | , id : int ; $ | D(6) |
-    | 0 2 4 6 | id : int ; $ | D(4) |
-    | 0 2 4 6 4 | : int ; $ | R(3) (V -> id) |
-    | 0 2 4 6 10 | : int ; $ | R(2) (V -> id, V) |
-    | 0 2 3 | : int ; $ | D(5) |
-    | 0 2 3 5 | int ; $ | D(8) |
-    | 0 2 3 5 8 | ;$ | R(4) (T -> int) |
-    | 0 2 3 5 7 | ;$ | D(11) |
-    | 0 2 3 5 7 11 | $ | R(1) (D -> var V : T ; ) |
-    | 0 1 | $ | accept |
+| Conflicto | Problema | Solución |
+| -- | -- | -- |
+| **Desplazamiento-reducción** | se produce cuando en una misma celda se puede poner un desplazamiento y una reducción. Esto significa que la GIC no es SLR | se puede resolver una de las dos opciones adecuada para que el analizador reconozca el lenguaje descrito por la GIC |
+| **Reducción-reducción** | aparece cuando en una misma celda es posible reducir de dos maneras diferentes. Esto también implica que la GIC no es SLR | elegir una de las dos reducciones, teniendo cuidado de que el analizador reconozca bien el lenguaje definido por la GIC. También se puede optar por modificar la GIC para que eso no ocurra |

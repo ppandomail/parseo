@@ -1,4 +1,6 @@
-# CUP
+# Parser - Herramientas
+
+## CUP
 
 * Cup (Constructor of Useful Parsers)  
 * Desarrollado en el Instituto de Tecnología de Georgia (EEUU)
@@ -12,7 +14,7 @@
 * Cup distingue entre terminales (devueltos por JLex) y no terminales, que son las reglas de la gramática.
 * Dentro de cada regla, Cup puede ejecutar código Java para realizar su trabajo de análisis.
 
-## Uso de Cup
+### Uso de Cup
 
 * Un archivo de entrada para Cup consta de las siguientes partes:
   * Definición de paquete y sentencias de import
@@ -107,7 +109,7 @@ expr ::= expr:e1 MAS expr:e2
 * Si el no terminal antecedente tiene asociada una cierta clase Java, obligatoriamente dentro de la cláusula {: ... :} habrá una sentencia RESULT = ...;
 * El objeto Java guardado en la variable RESULT será el objeto Java que se asocie al no terminal antecedente cuando se reduzca la regla de producción en la que se encuentre esa cláusula. {: ... :}
 
-## Errores sintácticos
+### Errores sintácticos
 
 * Cuando se produce un error en el análisis sintáctico, Cup invoca a los siguientes métodos:
 
@@ -119,7 +121,7 @@ public void unrecovered_sintax_error(Symbol s) throws Exception;
 * Una vez que se produce el error, se invoca el método syntax_error. Después se intenta recuperar el error. Si el intento de recuperar el error falla, entonces se invoca al método unrecovered_sintax_error. El objeto de la clase Symbol representa el último token consumido por el analizador.
 * Estos métodos se pueden redefinir dentro de la declaración parser code {: ... :}
 
-## El código generado
+### El código generado
 
 * **sym.java**: contiene las definiciones de constantes de la clase sym, que asigna un valor entero a cada terminal y, opcionalmente, a cada no terminal. Ejemplo:
 
@@ -161,9 +163,9 @@ analizer = new parser();
 analizer.parse();
 ```
 
-## Ejemplo calculadora
+### Ejemplo calculadora
 
-### Declaraciones JLex
+#### Declaraciones JLex
 
 ```plain
 import java_cup.runtime.Symbol;
@@ -185,7 +187,7 @@ import java_cup.runtime.Symbol;
 [^0-9\r\n\t \+\-\*"^"/]+ { System.out.println("Error léxico: "+ yytext() ); }
 ```
 
-### Declaraciones CUP
+#### Declaraciones CUP
 
 ```plain
 // terminales y no terminales
@@ -220,85 +222,383 @@ expresion ::= ENTERO:E1
 %prec SIGNO;
 ```
 
-## Ejercicios
+## ANTLR4
 
-1. Implementar un compilador para sumar números 0 y 1 terminados con punto y coma. Ejemplo:
-    * 0+1+1+1;      //3
-    * 1+1;          //2
-    * 1+0+0+0+0+1;  //2
+* ANTLR: ANother Tool for Language Recognition ("otra herramienta para reconocimiento de lenguajes")
+* Proporciona un framework para construir scanners y parsers a partir de una gramática.
+* Es un programa que determina si una palabra pertenece a dicho lenguaje (reconocedor), utilizando algoritmos LL(*) de parsing.
+* Se puede usar para la construcción de lenguajes, herramientas y frameworks.
+* Para una gramática, puede generar un parser que construya un árbol AST (árbol de sintaxis abstracta)
+* Permite crear DSLs:
+  * DSL: Domain Specific Language es un lenguaje especifico para un dominio o negocio
+  * DSL: dominio + sintaxis + semántica
+* [Sitio Web](https://tomassetti.me/antlr-mega-tutorial/)
 
-1. Implementar un compilador para operar con cadenas. Ejemplo:
-    * [P]                             // Inicio del programa
-    * [m] El cielo es celeste [/m]    // el cielo es celeste  
-    * [M] El cielo es celeste [/M]    // EL CIELO ES CELESTE
-    * [C] El cielo es celeste  [/C]   // 19
-    * [W] El cielo es celeste [/W]    // 4
-    * [Q] Hola , Mundo[/Q]            // NO
-    * [/P]                            // Fin del programa
+### Uso
 
-1. Lenguaje Micro. Descripción informal
-    * El único tipo de dato es entero.
-    * Todos los identificadores son declarados implícitamente y con una longitud máxima de 5 caracteres.
-    * Los identificadores deben comenzar con una letra y están compuestos de letras y dígitos.
-    * Las constantes son secuencias de dígitos (números enteros).
-    * Hay 2 tipos de sentencias:
-      * Asignación  ID:=Expresión;
-        * Expresión es infija y se construye con identificadores, constantes y los operadores + y -; los paréntesis están permitidos.
-      * Entrada/Salida
-        * leer(lista de IDs);
-        * escribir(lista de Expresiones);
-    * Cada sentencia termina con un “punto y coma” (;). El cuerpo de un programa está delimitado por inicio y fin.
-    * inicio, fin, leer y escribir son palabras reservadas y deben escribirse en minúsculas.
-    * Ejemplo de programa fuente:
+1. Definir una gramática dentro del archivo Hello.g4. Por ejemplo:
 
-        ```plain
-        inicio
-        leer (a,b);
-        cc := a+(b-2);
-        escribir (cc, a+4);
-        fin
+    ```antlr
+    grammar Hello;
+
+    r  : 'hello' ID;         // match keyword hello followed by an identifier
+    
+    ID : [a-z]+;             // match lower-case identifiers
+    WS : [ \t\r\n]+ -> skip; // skip spaces, tabs, newlines
+    ```
+
+1. Ejecutar ANTLR y probar
+
+    ```sh
+    $ antlr4 Hello.g4
+    $ javac Hello*.java
+
+    $ grun Hello r -tree
+    hello pepe
+    ^D
+    (r hello pepe)
+
+    $ grun Hello r -gui
+    hello pepe
+    ^D
+    ```
+
+1. Luego de ejecutar y buildear la gramática, ANTLR genera los archivos java necesarios para su correcto funcionamiento.
+
+### Ejemplo: Números enteros positivos
+
+```grammar
+grammar Numeros;
+
+programa: expresion;
+expresion : NUMERO;
+
+NUMERO : [0-9]+;
+WS : [ \t\r\n]+ -> skip;
+```
+
+### Ejemplo: Números enteros con signo
+
+```grammar
+grammar NumerosEnteros;
+
+programa: expresion;
+expresion : SIGNO? NUMERO;
+
+SIGNO : ('+' | '-');
+NUMERO : [0-9]+;
+WS : [ \t\r\n]+ -> skip;
+```
+
+### Ejemplo: Expresiones aritméticas básicas
+
+```grammar
+grammar Math;
+
+programa: expresion;
+expresion : termino ((SUMA | RESTA) termino)*; 
+termino : NUMERO | PARENTESISA expresion PARENTESISC;
+
+SUMA : '+';
+RESTA : '-';
+NUMERO : [0-9]+;
+PARENTESISA : '(';
+PARENTESISC : ')';
+WS : [ \t\r\n]+ -> skip;
+```
+
+```sh
+$ antlr4 Math.g4
+$ javac Math*.java
+$ grun Math programa -gui
+61+(98-3)+50
+^D
+```
+
+### Ejemplo: Expresiones aritméticas avanzadas
+
+```grammar
+grammar Expr;
+
+prog:   (expr NEWLINE)*;
+expr:   expr ('*'|'/') expr
+    |   expr ('+'|'-') expr
+    |   INT
+    |   '(' expr ')'
+    ;
+NEWLINE : [\r\n]+;
+INT     : [0-9]+;
+```
+
+```sh
+$ antlr4 Expr.g4
+$ javac Expr*.java
+$ grun Expr prog -gui
+100+2*34
+^D
+```
+
+### Ejemplo: Identificadores
+
+```grammar
+grammar Identificadores;
+
+programa: identificador;
+identificador : LETRA (LETRA | NUMERO)*;
+
+NUMERO : [0-9]+;
+LETRA : ([A-Z] | [a-z])+;
+
+WS : [ \t\r\n]+ -> skip;
+```
+
+### Ejemplo: Control de paréntesis
+
+```grammar
+grammar Parentesis;
+
+programa: expresion;
+expresion : (PARENTESISA expresion PARENTESISC | LETRA)*;
+
+LETRA : ([A-Z] | [a-z])+;
+PARENTESISA : '(';
+PARENTESISC : ')';
+
+WS : [ \t\r\n]+ -> skip;
+```
+
+### Ejemplo; Sentencias if y while
+
+```grammar
+grammar Sentencias;
+programa: BEGIN (sentenciaif | sentenciawhile) END;
+sentenciaif : IF expresion THEN sentencia | IF expresion THEN sentencia ELSE sentencia;
+sentenciawhile : WHILE expresion DO sentencia;
+expresion: LETRA;
+sentencia: LETRA;
+
+BEGIN : 'begin';
+END : 'end';
+IF : 'if';
+THEN : 'then';
+ELSE : 'else';
+WHILE : 'while';
+DO : 'do';
+LETRA : ([A-Z] | [a-z])+;
+WS : [ \t\r\n]+ -> skip;
+```
+
+### Ejemplo: Lenguaje Gherkin
+
+```grammar
+grammar Gherkin;
+
+story : feature? background? scenario*;
+
+feature : feature_keyword feature_title feature_content;
+
+feature_content : (NEWLINE SPACE SPACE line)* ;
+
+feature_title : line ;
+
+background : NEWLINE*? SPACE SPACE background_keyword (NEWLINE SPACE SPACE SPACE SPACE step_given);
+
+scenario : NEWLINE*? scenario_keyword scenario_title (NEWLINE SPACE SPACE SPACE SPACE step)+ NEWLINE* examples*;
+
+scenario_title : line ;
+
+examples : examples_keyword NEWLINE+ SPACE SPACE examples_table ;
+
+examples_table : table ;
+
+table : table_row+;
+
+table_row : (SPACE SPACE)? '|' cell+  NEWLINE?;
+
+cell : (SPACE|TEXT)*? '|';
+
+step: (step_given | step_when | step_then);
+
+step_given : step_given_keyword step_line (NEWLINE SPACE SPACE step_connector_keyword step_line)*;
+step_when : step_when_keyword step_line (NEWLINE SPACE SPACE step_connector_keyword step_line)*;
+step_then : step_then_keyword step_line (NEWLINE SPACE SPACE step_connector_keyword step_line)*;
+
+step_line : (step_text_line | step_table_line) ;
+
+step_text_line : line ;
+
+step_table_line : table ;
+
+line : (SPACE|TEXT)*;
+
+background_keyword : 'Background:' | 'Antecedentes:' ;
+
+feature_keyword : 'Feature:' | 'Caracteristica:' ;
+
+scenario_keyword : 'Scenario:' | 'Escenario:' ;
+
+examples_keyword : 'Examples:' | 'Ejemplos:' ;
+
+step_given_keyword : 'Given' | 'Dado' | 'Dada' | 'Dados' | 'Dadas' ;
+
+step_when_keyword : 'When' | 'Cuando' ;
+
+step_then_keyword : 'Then' | 'Entonces' ;
+
+step_connector_keyword : 'And' | 'But' | 'Y' | 'E' | 'Pero' ; 
+
+SPACE : ' ' | '\t';
+
+NEWLINE : '\r'? '\n';
+
+TEXT : (UPPERCASE_LETTER | LOWERCASE_LETTER | DIGIT | SYMBOL ) ;
+
+fragment UPPERCASE_LETTER : 'A'..'Z' ;
+
+fragment LOWERCASE_LETTER : 'a'..'z' ;
+
+fragment DIGIT : '0'..'9' ;
+
+fragment SYMBOL : '\u0021'..'\u0027'
+    | '\u002a'..'\u002f'
+    | '\u003a'..'\u0040'
+    | '\u005e'..'\u0060'
+    | '\u00a1'..'\u00FF'
+    | '\u0152'..'\u0192'
+    | '\u2013'..'\u2122'
+    | '\u2190'..'\u21FF'
+    | '\u2200'..'\u22FF'
+    | '('..')'
+    | '['..']'
+    | '{'..'}' ;
+
+COMMENT : '/*' .*? '*/' -> skip ;
+
+LINE_COMMENT : '#-- ' .*? [\r\n] -> skip ;
+```
+
+### lab.antlr.org
+
+* Es una herramienta para desarrollar y probar gramáticas
+
+![ANTLR](img/antlr1.png)
+
+![ANTLR](img/antlr2.png)
+
+## Bison
+
+* Es un programa generador de parsers de propósito general perteneciente al proyecto GNU disponible para prácticamente todos los sistemas operativos
+* Se usa normalmente acompañado de flex aunque los scanners se pueden también obtener de otras formas
+* Convierte la descripción formal de un lenguaje, escrita como una GIC LALR, en un programa en C, C++, o Java que realiza parsing
+* Es utilizado para crear analizadores para muchos lenguajes, desde simples calculadoras hasta lenguajes complejos
+* Tiene compatibilidad con Yacc: todas las gramáticas bien escritas para Yacc, funcionan en Bison sin necesidad de ser modificadas. Cualquier persona que esté familiarizada con Yacc podría utilizar Bison sin problemas
+* Fue escrito en un principio por Robert Corbett; Richard Stallman lo hizo compatible con Yacc y Wilfred Hansen de la Carnegie Mellon University agregó soporte para literales multicaracter y otras características
+* [Sitio Web Oficial](https://www.gnu.org/software/bison/)
+
+## PLY
+
+* Es una implementación en Python de lex y yacc, generadores de scanners y parsers respectivamente
+* Se definen los patrones de los diferentes tokens que se desean reconocer, esto se hace a través de ER
+* Se definen las producciones y acciones para formar la gramática a través de funciones
+
+### Pasos
+
+1. Instalar la herramienta ply. Ejemplo: pip install ply
+1. Crear carpeta del proyecto. Ejemplo: proy-ply-robot
+1. Crear archivo .py dentro del proyecto. Ejemplo: traductor.py
+    1. Importar los metacompiladores
+
+        ```python
+        import ply.lex as lex
+        import ply.yacc as yacc
         ```
 
-    * GIC:
+    1. Definir tokens:
 
-        ```grammar
-        <programa> -> inicio <listaSentencias> fin
-        <listaSentencias> -> <sentencia> {<sentencia>}
-        <sentencia> -> <identificador> := <expresión>; |  
-                      leer ( <listaIdentificadores> ); | 
-                      escribir ( <listaExpresiones> );
-        <listaIdentificadores> -> <identificador> { , <identificador> }
-        <listaExpresiones> -> <expresión> { , <expresión> } 
-        <expresión> -> <primaria> {<operadorAditivo> <primaria>}
-        <primaria> -> <identificador> | <constante> | ( <expresión> )
+        ```python
+        tokens = ('COMIENZO', 'NORTE', 'SUR', 'ESTE', 'OESTE', 'FIN')
         ```
 
-1. Lenguaje Esencial:
-    * Único tipo de datos que se requiere es el entero no negativo.
-    * No requiere enunciados de declaración de tipo, sino que los identificadores, que consisten en letras y dígitos (comenzando por una letra) se declaran automáticamente como de tipo entero no negativo con solo aparecer por primera vez en un programa.
-    * Nuestro lenguaje contiene los dos enunciados de asignación siguiente:
-      * incr nombre;
-      * decr nombre;
-    * El primero incrementa en uno el valor asignado al identificador nombre, mientras el segundo lo decrementa en uno (a menos que el valor por decrementar sea cero, en cuyo caso permanece con dicho valor).
-    * El único otro enunciado de nuestro lenguaje es el par de enunciados de control: 
-      * while nombre <> 0 do; … end;
-    * El cual indica que es necesario repetir los enunciados que se encuentran entre los enunciados while y end mientras el valor asignado al identificador nombre sea cero.
-    * Ejemplo de programa fuente:
+    1. Definir patrones (ER):
 
-      ```plain
-      while aux <> 0 do;
-        decr aux;
-      end;
-      while nombre1 <> 0 do;
-        decr nombre1;
-      end;
-      while nombre2 <> 0 do;
-        incr aux;
-        decr nombre2;
-      end;
-      while aux <> 0 do;
-        incr nombre1;
-        incr nombre2;
-        decr aux;
-      end;
-      ```
+        ```python
+        t_COMIENZO = r'C'
+        t_NORTE    = r'N'
+        ...
+        t_ignore   = ' \t'
+        ```
+
+    1. Construir el Scanner:
+
+        ```python
+        lexer = lex.lex()
+        ```
+
+    1. Definir GIC: El parámetro t es una tupla, en cada posición tiene el valor de los terminales y no terminales de la producción
+
+       ```python
+       def p_programa(t):
+        '''prog : COMIENZO sentencias FIN
+                | COMIENZO FIN '''
+        # acciones semánticas
+        ```
+
+    1. Construir el Parser, leer la entrada y hacer el parsing:
+
+        ```python
+        parser = yacc.yacc()
+        f = open("./entrada.txt", "r")
+        input = f.read()
+        print(input)
+        parser.parse(input)
+        ```
+
+1. Crear archivo .txt dentro del proyecto. Ejemplo: entrada.txt
+
+    ```plain
+    CSNNSOOONF
+    ```
+
+1. Ejecutar el archivo .py. Ejemplo: python traductor.py
+
+## PetitParser
+
+* Es un (black-box) framework para construir parsers:
+  * Validar texto
+  * Extraer un substring que matchea las reglas
+  * Ejecutar acciones custom
+* Es aplicable para casos en donde:
+  * Se conoce la gramática
+  * Se estudian programas (válidos) de un lenguaje
+* Puede implementar cosas que (ANSI) Regex no pueden
+* Es mucho mejor que implementar reglas de validación con condicionales
+* Permite crear parsers eficientes en diferentes lenguajes de programación: C#, Clojure, Dart, Java, Kotlin, PHP, Python, Smalltalk, Swift y TypeScript.
+* [Sitio Web](https://petitparser.github.io/)
+
+### Instalación PetitParser for Python
+
+```shell
+pip install petitparser 
+```
+
+### Ejemplo gramática identificadores
+
+```python
+from petitparser import character as c
+
+ident = c.letter() & (c.letter() | c.digit()).star()
+
+# Análisis de cadenas:
+id1 = ident.parse('yeah')
+print(id1.value) # ['y', ['e', 'a', 'h']]
+
+id2 = ident.parse('f12')
+print(id2.value) # ['f', ['1', '2']]
+
+id3 = ident.parse('123')
+print(id3.message)  # letter expected
+print(id3.position) # 0
+
+print(ident.accept('foo')) # True
+print(ident.accept('123')) # False
+```
