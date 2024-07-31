@@ -8,7 +8,7 @@
 
 * Analizar y evaluar características de un traductor para su inclusión en un proyecto de informática
 * Desarrollar traductores
-* Entender cómo se construyen (decisiones de diseño)
+* Entender cómo se construyen los traductores (decisiones de diseño)
 
 ## Programa
 
