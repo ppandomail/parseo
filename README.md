@@ -1,4 +1,4 @@
-# Parseo y Generación de Código (UNAHUR) / Desarrollo de Compiladores (UB)
+# Parseo y Generación de Código (UNAHUR)
 
 ## Docentes
 
