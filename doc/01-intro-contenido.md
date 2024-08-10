@@ -1,60 +1,17 @@
 # Introducción
 
-## Compilador (Compiler)
+## Traductor (Translator)
 
-* Es un tipo especial de traductor en el que el lenguaje fuente es un lenguaje de alto nivel y el lenguaje objeto es de bajo nivel
-
-  ![Compilador](img/compilador.JPG)
-
-  ![Ejemplo Compilador](img/ejemplo-compilador.png)
-
-  ![Ejemplo Traductor](img/ejemplo-traductor.JPG)
-
-* 1951: Grace Hooper, desarrolla el primer compilador, el A-0. La primera rutina "compilada" se probó con éxito en una máquina UNIVAC
-
-  ![Univac](img/univac.png)
-
-* 1954: John Backus, comenzó el desarrollo de un compilador de FORTRAN para IBM 704, que le llevó dos años y medio y 18 hombres para realizarlo
-
-* Los lenguajes compilados tienen como resultado archivos binarios que lee el sistema operativo o directamente el hardware y los ejecuta. Ejemplo C, C++, Pascal, Fortran, COBOL, Go, etc.
-
-## Herramientas software necesarias para los compiladores
-
-### Editores (Editors)
-
-* Son herramientas software que se utilizan para leer y escribir los programas que posteriormente el compilador traducirá a código máquina
-* Actualmente, se integran con los compiladores (.NET) constituyendo un IDE (entorno de desarrollo interactivo), aunque se puede utilizar por separado (Eclipse)
-* Para que los archivos que generan se puedan leer por cualquier editor, es necesario que tengan un formato estándar, concretamente ASCII
-
-### Traductores (Translators)
-
-* Son programas que convierten un programa escrito en un lenguaje (lenguaje fuente) a otro lenguaje (lenguaje objeto)
+* Es un programa que convierten un programa escrito en un lenguaje (lenguaje fuente) a otro lenguaje (lenguaje objeto)
 * Ejemplo: programa de lenguaje C a Pascal
 
   ![Traductor](img/traductor.JPG)
 
   ![Traductores](img/traductores.JPG)
 
-### Intérpretes (Interpreters)
+## Ensamblador (Assembler)
 
-* Son traductores de lenguajes
-
-  | Traductor | |
-  | -- | -- |
-  | **Compilador** | analiza todo el programa fuente, crea el programa objeto y luego permite su ejecución (sólo del programa objeto obtenido) |
-  | **Intérprete** | lee sentencia por sentencia del programa fuente, la convierte en el código objeto y la ejecuta |
-
-* Es fácil comprender que, tras compilar un programa, su ejecución es mucho más rápida que la ejecución de un programa interpretado
-* Uno de los motivos de la existencia de programas interpretados es que hay algunos lenguajes de programación que permiten agregar sentencias durante la ejecución, cosa que no se podría hacer si fueran compilados
-* Ejemplos: Basic, Python, SmallTalk, Ruby, Javascript, etc.
-
-  ![Intérprete](img/interprete.png)
-
-  ![Diferencias entre Intérpretes y Compiladores](img/diferencias-interpretes-compiladores.JPG)
-
-### Ensambladores (Assemblers)
-
-* Es un traductor para una máquina en particular, donde el lenguaje fuente es un lenguaje ensamblador y el lenguaje objeto es el código de la máquina
+* Es un **tipo de traductor** para una máquina en particular, donde el lenguaje fuente es un **lenguaje ensamblador** y el lenguaje objeto es el **código de la máquina**
 * Es un traductor sencillo, en el que el lenguaje fuente tiene una estructura tan sencilla que permite la traducción de cada sentencia fuente a una única instrucción en código máquina
 * En definitiva, existe una correspondencia uno a uno entre las instrucciones ensamblador y las instrucciones máquina
 * Ejemplo: Instrucción ensamblador: LD HL, #0100 -> Código máquina generado: 65h.00h.01h
@@ -66,21 +23,60 @@
 
   ![Ensamblador](img/ensamblador.png)
 
+## Intérprete (Interpreter)
+
+* Es un **tipo de traductor** de lenguajes
+* Lee sentencia por sentencia del programa fuente, la convierte en el código objeto y la ejecuta
+* Uno de los motivos de la existencia de programas interpretados es que hay algunos lenguajes de programación que permiten agregar sentencias durante la ejecución, cosa que no se podría hacer si fueran compilados
+* Ejemplos: Basic, Python, SmallTalk, Ruby, Javascript, etc.
+
+  ![Intérprete](img/interprete.png)
+
+## Compilador (Compiler)
+
+* Es un **tipo de traductor** en el que el lenguaje fuente es un **lenguaje de alto nivel** y el lenguaje objeto es de **bajo nivel**
+* Analiza todo el programa fuente, crea el programa objeto y luego permite su ejecución (sólo del programa objeto obtenido)
+* Después de compilar un programa, su ejecución es mucho más rápida que la ejecución de un programa interpretado
+
+  ![Compilador](img/compilador.JPG)
+
+  ![Ejemplo Compilador](img/ejemplo-compilador.png)
+
+  ![Ejemplo Traductor](img/ejemplo-traductor.JPG)
+
+  | Año | Desarrollador/a | |
+  | -- | -- | -- |
+  | **1951** | **Grace Hooper** | desarrolla el primer compilador, el A-0. La primera rutina "compilada" se probó con éxito en una máquina UNIVAC |
+  | **1954** | **John Backus**  | comenzó el desarrollo de un compilador de FORTRAN para IBM 704, que le llevó dos años y medio y 18 personas para realizarlo |
+
+  ![Univac](img/univac.png)
+
+* Los lenguajes compilados tienen como resultado archivos binarios que lee el sistema operativo o directamente el hardware y los ejecuta. Ejemplo C, C++, Pascal, Fortran, COBOL, Go, etc.
+
+  ![Diferencias entre Intérpretes y Compiladores](img/diferencias-interpretes-compiladores.JPG)
+
+## Herramientas software necesarias para los compiladores
+
+### Editores (Editors)
+
+* Se utilizan para leer y escribir los programas que posteriormente el compilador traducirá a código máquina
+* Actualmente, se integran con los compiladores constituyendo un IDE (entorno de desarrollo interactivo)
+* Para que los archivos que generan se puedan leer por cualquier editor, es necesario que tengan formato ASCII
+
 ### Preprocesadores (Preprocessors)
 
-* Son programas que funcionan de forma independiente una vez que el compilador lo llama, antes de comenzar el proceso de compilación
-* Las tareas que realizan son:
+* Son programas que funcionan de forma independiente una vez que el compilador lo llama, modificando el programa fuente antes de comenzar el proceso de compilación
+* Tareas:
   * Sustituir las macros por las sentencias que las componen
   * Incluir otros archivos o librerías
   * Eliminar comentarios
-* Permitiendo modificar el programa fuente antes de la verdadera compilación
 
   ![Preprocesadores](img/preprocesador.png)
 
 ### Enlazadores (Linkers)
 
 * Se encargan de unir los diferentes módulos con sus respectivos códigos objeto para producir un archivo ejecutable
-* También sirven para enlazar el código objeto con las funciones que necesita de una librería de funciones u otros módulos (archivos con extensión “lib” o “dll”), además de con la memoria o los dispositivos de entrada y salida utilizando para ellos llamadas a funciones del sistema operativo
+* También sirven para enlazar el código objeto con las funciones que necesita de una librería de funciones u otros módulos (archivos con extensión "lib" o "dll")
 
   ![Enlazador](img/enlazador.png)
 
@@ -90,7 +86,7 @@
 
 * Se encargan de asignar las direcciones y el espacio de memoria necesario para la ejecución del programa
 * Esto se puede hacer porque el enlazador le proporciona direcciones de memoria relativas, denominándose este tipo de código reubicable o relocalizable, y el cargador le asigna posiciones reales o absolutas
-* Es una herramienta que trae el sistema operativo, en el caso de Linux se denomina ld (/lib/ld-linux.so)
+* Es una herramienta que trae el sistema operativo
 
   ![Cargador](img/cargador.JPG)
 
@@ -122,9 +118,9 @@
 
 ## Estructura de un compilador
 
-* Un compilador es un programa complejo que consta de una serie de pasos, generalmente entrelazados, y que como resultado convierte un programa en un lenguaje de alto nivel en otro de bajo nivel (generalmente código máquina o lenguaje ensamblador)
-* Los pasos o fases de la compilación están actualmente bien definidos y en cierta medida sistematizados, aunque no están faltos de dificultad. Esta aumenta conforme se incrementa la riqueza del lenguaje a compilar
-* Etapas del proceso de compilación:
+* Un compilador es un programa complejo que consta de una serie de pasos o fases bien definidas y sistematizadas
+
+* **Etapas del proceso de compilación**:
 
   | Etapa | |
   | -- | -- |
@@ -133,7 +129,7 @@
 
   ![Etapas](img/etapas.png)
 
-### Fases del proceso de compilación
+* **Fases del proceso de compilación**:
 
   | Fase | | Comienza | Finaliza |
   | -- | -- | -- | -- |
