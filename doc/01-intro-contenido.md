@@ -60,7 +60,7 @@
 ### Editores (Editors)
 
 * Se utilizan para leer y escribir los programas que posteriormente el compilador traducirá a código máquina
-* Actualmente, se integran con los compiladores constituyendo un IDE (entorno de desarrollo interactivo)
+* Actualmente, se integran con los compiladores constituyendo un IDE (entorno de desarrollo integrado)
 * Para que los archivos que generan se puedan leer por cualquier editor, es necesario que tengan formato ASCII
 
 ### Preprocesadores (Preprocessors)
