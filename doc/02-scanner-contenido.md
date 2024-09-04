@@ -150,7 +150,7 @@
 
 | Utilizando un ... | | Ventajas | Desventajas |
 | -- | -- | -- | -- |
-| **Generador de scaners**   | son herramientas que a partir de las ER generan un programa que permite reconocer los tokens o componentes léxicos. Suelen estar escritos en C (LEX) o Java (JFLEX) | comodidad y rapidez de desarrollo | programas ineficientes y dificultad de mantenimiento del código generado |
+| **Generador de scanners**   | son herramientas que a partir de las ER generan un programa que permite reconocer los tokens o componentes léxicos. Suelen estar escritos en C (LEX) o Java (JFLEX) | comodidad y rapidez de desarrollo | programas ineficientes y dificultad de mantenimiento del código generado |
 | **Lenguaje de alto nivel** | a partir del diagrama de transiciones y del pseudocódigo correspondiente se programa un scanner | eficiente y compacto (lo que facilita el mantenimiento) | hay que realizarlo todo a mano |
 | **Lenguaje de bajo nivel (ensamblador)** | | más eficiente y compacto | más difícil de desarrollar |
 
