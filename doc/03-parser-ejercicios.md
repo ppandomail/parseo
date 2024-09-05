@@ -2,7 +2,7 @@
 
 ## Ejercicios
 
-1. Diseñar una gramática no ambigua para el lenguaje de las expresiones que se pueden construir con true y false y los operadores booleanos or, and, not y los paréntesis. La precedencia de mayor a menor es not and or. Los dos últimos son asociativos por la derecha
+1. Diseñar una GIC no ambigua para el lenguaje de las expresiones que se pueden construir con true y false y los operadores booleanos or, and, not y los paréntesis
 
     ```grammar
     E -> T or E | T
@@ -10,7 +10,7 @@
     F -> not F | true | false | (E)
     ```
 
-1. Construir una gramática no ambigua que reconozca todas las declaraciones posibles de variables de los siguientes tipos: int, String, boolean y double en Java. Por ejemplo:
+1. Construir una GIC no ambigua que reconozca todas las declaraciones posibles de variables de los siguientes tipos: int, String, boolean y double en Java. Por ejemplo:
 
     ```java
     int x, y;
@@ -26,7 +26,7 @@
     F -> F id coma | id
     ```
 
-1. Crear los diagramas de sintaxis y el programa para esta gramática:
+1. Crear los diagramas de sintaxis y el programa para esta GIC:
 
     ```grammar
     Programa -> Declaraciones Sentencias
@@ -149,7 +149,7 @@
 
   }
 
-1. Identificar no terminales y terminales en la siguiente gramática incontextual
+1. Identificar no terminales y terminales en la siguiente GIC
 
     ```grammar
     <Programa> -> <Instrucciones> 
@@ -164,19 +164,19 @@
     NO TERMINALES = {<Programa>, <Instrucciones>, <Instrucción>, <Operando>, <Operador>}
     ```
 
-1. Dibujar el Árbol de Análisis Sintáctico correspondiente al reconocimiento de la siguiente secuencia:
+1. Dibujar el AAS correspondiente al reconocimiento de la siguiente secuencia:
 
   ```java
   true AND false;     
   false OR true;
   ```
 
-1. Implementar un compilador para sumar números 0 y 1 terminados con punto y coma. Ejemplo:
+1. Implementar un parser para sumar números 0 y 1 terminados con punto y coma. Ejemplo:
     * 0+1+1+1;      //3
     * 1+1;          //2
     * 1+0+0+0+0+1;  //2
 
-1. Implementar un compilador para operar con cadenas. Ejemplo:
+1. Implementar un parser para operar con cadenas. Ejemplo:
     * [P]                             // Inicio del programa
     * [m] El cielo es celeste [/m]    // el cielo es celeste  
     * [M] El cielo es celeste [/M]    // EL CIELO ES CELESTE
@@ -185,25 +185,25 @@
     * [Q] Hola , Mundo[/Q]            // NO
     * [/P]                            // Fin del programa
 
-1. Implemente un compilador que reconozca los siguientes casos:
+1. Implementar un parser que reconozca los siguientes casos:
     * En publicaciones científicas las lista de autores contiene
       * Un nombre, iniciales (opcional), al menos un apellido por cada autor
       * Cada autor separado por coma con el siguiente autor excepto el último autor que es precedido por el conector "and"
     * Posibles direcciones de e-mail, implemente test cases del parser
 
-1. Lenguaje Micro. Descripción informal
-    * El único tipo de dato es entero.
-    * Todos los identificadores son declarados implícitamente y con una longitud máxima de 5 caracteres.
-    * Los identificadores deben comenzar con una letra y están compuestos de letras y dígitos.
-    * Las constantes son secuencias de dígitos (números enteros).
+1. Implementar un parser para el **Lenguaje Micro**:
+    * El único tipo de dato es entero
+    * Todos los identificadores son declarados implícitamente y con una longitud máxima de 5 caracteres
+    * Los identificadores deben comenzar con una letra y están compuestos de letras y dígitos
+    * Las constantes son secuencias de dígitos (números enteros)
     * Hay 2 tipos de sentencias:
       * Asignación  ID:=Expresión;
-        * Expresión es infija y se construye con identificadores, constantes y los operadores + y -; los paréntesis están permitidos.
+        * Expresión es infija y se construye con identificadores, constantes y los operadores + y -; los paréntesis están permitidos
       * Entrada/Salida
         * leer(lista de IDs);
         * escribir(lista de Expresiones);
-    * Cada sentencia termina con un “punto y coma” (;). El cuerpo de un programa está delimitado por inicio y fin.
-    * inicio, fin, leer y escribir son palabras reservadas y deben escribirse en minúsculas.
+    * Cada sentencia termina con un “punto y coma” (;). El cuerpo de un programa está delimitado por inicio y fin
+    * inicio, fin, leer y escribir son palabras reservadas y deben escribirse en minúsculas
     * Ejemplo de programa fuente:
 
         ```plain
@@ -228,16 +228,16 @@
         <primaria> -> <identificador> | <constante> | ( <expresión> )
         ```
 
-1. Lenguaje Esencial:
-    * Único tipo de datos que se requiere es el entero no negativo.
-    * No requiere enunciados de declaración de tipo, sino que los identificadores, que consisten en letras y dígitos (comenzando por una letra) se declaran automáticamente como de tipo entero no negativo con solo aparecer por primera vez en un programa.
+1. Implementar un parser para el **Lenguaje Esencial**:
+    * Único tipo de datos que se requiere es el entero no negativo
+    * No requiere enunciados de declaración de tipo, sino que los identificadores, que consisten en letras y dígitos (comenzando por una letra) se declaran automáticamente como de tipo entero no negativo con solo aparecer por primera vez en un programa
     * Nuestro lenguaje contiene los dos enunciados de asignación siguiente:
       * incr nombre;
       * decr nombre;
-    * El primero incrementa en uno el valor asignado al identificador nombre, mientras el segundo lo decrementa en uno (a menos que el valor por decrementar sea cero, en cuyo caso permanece con dicho valor).
-    * El único otro enunciado de nuestro lenguaje es el par de enunciados de control: 
-      * while nombre <> 0 do; … end;
-    * El cual indica que es necesario repetir los enunciados que se encuentran entre los enunciados while y end mientras el valor asignado al identificador nombre sea cero.
+    * El primero incrementa en uno el valor asignado al identificador nombre, mientras el segundo lo decrementa en uno (a menos que el valor por decrementar sea cero, en cuyo caso permanece con dicho valor)
+    * El único otro enunciado de nuestro lenguaje es el par de enunciados de control:
+      * while nombre <> 0 do; ... end;
+    * El cual indica que es necesario repetir los enunciados que se encuentran entre los enunciados while y end mientras el valor asignado al identificador nombre sea cero
     * Ejemplo de programa fuente:
 
       ```plain

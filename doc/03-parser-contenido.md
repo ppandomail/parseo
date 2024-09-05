@@ -6,37 +6,39 @@
 * Si no es así, dar los mensajes de error adecuados, pero continuar funcionando sin detenerse, hasta que se llegue al final del archivo de entrada
 * Guia casi todo el proceso de la compilación. Esto es así porque por un lado va solicitando al Scanner los tokens y al mismo tiempo va dirigiendo el proceso de análisis semántico y generación de código intermedio (ambos procesos se les llama, traducción dirigida por la sintaxis)
 
-![Fases de compilación](img/fase-parser.png)
+  ![Fases de compilación](img/fase-parser.png)
 
 * Generalmente, los Parsers obtienen un árbol teórico, árbol de análisis sintáctico (AAS) que permite expresar el orden de los lexemas según van apareciendo
 * Si se utiliza el método de traducción dirigida por la sintaxis no se llega ni siquiera a plantearse la generación del árbol ya que el Parser realizará las acciones semánticas e incorporará los métodos para realizar la generación de código intermedio y avisará de errores y su recuperación
 * Es decir, el Parser hará las funciones de las dos fases siguientes (analizador semántico y generación de código intermedio)
 * Si se le da la oportunidad a la creación del AAS, recorriéndolo es posible crear una representación intermedia del programa fuente, ya sea en forma de árbol sintáctico abstracto o en forma de programa en un lenguaje intermedio
 * Para generar el Parser, se pueden utilizar dos técnicas:
-  * a mano (es difícil aunque eficiente en su funcionamiento)
-  * mediante herramientas que lo generan automáticamente (es menos eficiente pero más fácil de implementar)
 
-## Especificación del Lenguaje
+  | Técnica | Implementación | Eficiencia |
+  | -- | -- | -- |
+  | **a mano**                                               | difícil | eficiente |
+  | **mediante herramientas que lo generan automáticamente** | fácil   | menos eficiente |
 
-* Para que un Parser funcione, se debe especificar el lenguaje que debe poder leer.
-* El lenguaje debe ser representado con unas reglas únicas y bien formadas de manera que el Parser funcione de una manera bien definida.
-* Es decir, el lenguaje debe ser formal (tener unas reglas bien definidas). A estas reglas se las llama gramática.
-* Por lo tanto, el primer paso para poder implementar un AS es definir la gramática que debe ser capaz de analizar.
-* Una gramática es una especificación (formal) de un conjunto de strings válidos (programas)
-* La gramática no explica el “significado” de las partes del programa.
+## Especificación del Lenguaje (L)
+
+* Para que un Parser funcione, se debe especificar formalmente L
+* L debe ser representado con reglas únicas y bien formadas (GIC) de manera que el Parser funcione de una manera bien definida
+* Primer paso para implementar un Parser es definir la GIC que debe ser capaz de analizar
+* Una GIC es una especificación (formal) de un conjunto de strings válidos (programas)
+* La GIC no explica el "significado" de las partes del programa
 * Ejemplo: "Cobertorzinho"
 
-```grammar
-<exp> ::= a 
-<exp> ::= b
-<exp> ::= virar(<exp>)
-<exp> ::= costurar(<exp>,<exp>)
-```
+  ```grammar
+  <exp> ::= a 
+  <exp> ::= b
+  <exp> ::= virar(<exp>)
+  <exp> ::= costurar(<exp>,<exp>)
+  ```
 
 ## Diseño de Gramáticas Independientes/Libre de Contexto (GIC)
 
-* Una GIC es aquella en donde sus reglas de producción se pueden aplicar sin considerar el contexto del no-terminal
-* Una GIC se define por tuplas de 4 elementos:
+* GIC es aquella en donde sus reglas de producción se pueden aplicar sin considerar el contexto del no-terminal
+* GIC se define por tuplas de 4 elementos:
 
   | Elementos || Representación |
   | -- | -- | -- |
@@ -189,8 +191,8 @@
 
 ## Diagrama de sintaxis
 
-* Son grafos dirigidos donde los elementos no terminales de la GIC aparecen como rectángulos y los terminales como círculos o elipses.
-* Todo diagrama de sintaxis se supone que tiene un origen y un destino, aunque no se dibujan (se supone que el origen está a la izquierda y el destino a la derecha).
+* Son grafos dirigidos donde los elementos no terminales de la GIC aparecen como rectángulos y los terminales como círculos o elipses
+* Todo diagrama de sintaxis se supone que tiene un origen y un destino, aunque no se dibujan (se supone que el origen está a la izquierda y el destino a la derecha)
 
   ![Diagrama IF](img/if.png)
 
