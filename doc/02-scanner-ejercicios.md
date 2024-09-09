@@ -10,6 +10,8 @@
     * RESTAR: la secuencia -
     * IMPRIMIR: la palabra reservada print
 
+    ![DT eje1](img/dt-ej1.jpg)
+
     | Q | + | - | = | 0 | 1-9 | p | r | i | n | t | Otras | Token | Retroceso |
     | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
     | 0 | 1 | 2 | 3 | error | 4 | 8 | 6 | 6 | 6 | 6 | 6 | - | - |
