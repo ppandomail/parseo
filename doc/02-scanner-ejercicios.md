@@ -34,6 +34,8 @@
     1. Generar la tabla de transiciones
     1. Escribir un programa en Java para implementar la tabla
 
+    ![DT eje2](img/dt-ej2.jpg)
+
     | Q | a | b | Token | Retroceso |
     | -- | -- | -- | -- | -- |
     | 0 | 1 | 4 | - | - |
