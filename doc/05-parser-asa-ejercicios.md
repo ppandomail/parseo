@@ -31,8 +31,8 @@
     T -> int | bool
     ```
 
-    1. Construir el autómata.
-    1. Construir la tabla de análisis SLR.
+    1. Construir el autómata
+    1. Construir la tabla de análisis SLR
     1. Analizar la palabra var id , id : int ;
 
     | Q | var | : | ; | id | , | int | bool | $ | D | V | T |
