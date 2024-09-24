@@ -185,6 +185,22 @@ Sino
   | PRIM(C) = {c, e, g, λ} |
   | PRIM(B) = {a, λ} |
   | PRIM(A) = {a, c, e, g, i} |
+  ||
+  | SIG(A) = {$, d} |
+  | SIG(B) = {c, e, g, i, f} |
+  | SIG(C) = {i, b} |
+  | SIG(D) = {$, d, h} |
+  ||
+  | PRED(A -> BCD) = {a, c, e, g, i} |
+  | PRED(B -> aCb) = {a} |
+  | PRED(B -> λ) = {c, e, g, i, f} |
+  | PRED(C -> cAd) = {c} |
+  | PRED(C -> eBf) = {e} |
+  | PRED(C -> gDh) = {g} |
+  | PRED(C -> λ) = {i, b} |
+  | PRED(D -> i) = {i} |
+  ||
+  | Es LL(1) |
 
 * **Ejemplo 5**:
 
