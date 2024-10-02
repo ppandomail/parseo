@@ -41,11 +41,11 @@ S -> c(S,S) | g(S) | 1 | 2
 | #c(g(1 | ),2) | reduce |
 | #c(g(S | ),2) | shift |
 | #c(g(S) | ,2) | reduce |
-| $c(S | ,2) | shift |
-| $c(S, | 2) | shift |
-| $c(S,2 | ) | reduce |
-| $c(S,S | ) | shift |
-| $c(S,S) | λ | reduce |
+| #c(S | ,2) | shift |
+| #c(S, | 2) | shift |
+| #c(S,2 | ) | reduce |
+| #c(S,S | ) | shift |
+| #c(S,S) | λ | reduce |
 | #S | λ | δ(q1, λ, S) = (q2, λ) |
 | # | λ | δ(q2, λ, #) = (q3, λ) |
 | λ | λ | accept |
