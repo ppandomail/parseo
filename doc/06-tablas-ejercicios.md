@@ -37,4 +37,31 @@
         27: end.
         ```
 
-        ![Resuelto](img/tt-ts.png)
+    * TT
+
+    | Linea PRG | Cod | Nombre | TipoBase | Padre | Dimensión | Mínimo | Máximo | Ámbito | Observaciones |
+    | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+    | L1  | 0 | integer | -1 | -1 | 1 | -1 | -1 | 0 | primitivo        |
+    | L1  | 1 | boolean | -1 | -1 | 1 | -1 | -1 | 0 | primitivo        |
+    | L3  | 2 | vector  | 0  | -1 | 8 | 0  | 7  | 0 |                  |
+    | L15 | 3 | vect    | 0  | -1 | 8 | 1  | 8  | 1 |                  |
+    | L20 |   |         |    |    |   |    |    |   | Se elimina Cod 3 |
+
+    * TS
+
+    | Linea PRG | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Ámbito | Obervaciones |
+    | -- | -- | -- | -- | -- | -- | -- | -- | -- |
+    | L4  | 0 | x         | variable  | 0 | -1 | null  | 0 |                               |
+    | L4  | 1 | v         | variable  | 2 | -1 | null  | 0 |                               |
+    | L6  | 2 | factorial | función   | 0 | 1  | [0]   | 0 | [0] referencia a Cod de TS    |
+    | L6  | 3 | x         | parámetro | 0 | -1 | null  | 1 |                               |
+    | L7  | 4 | y         | variable  | 0 | -1 | null  | 1 |                               |
+    | L7  | 5 | z         | variable  | 0 | -1 | null  | 1 |                               |
+    | L12 |   |           |           |   |    |       |   | Se elimina Cod 3, 4 y 5       |
+    | L14 | 3 | suma      | función   | 2 | 2  | [2,0] | 0 |                               |
+    | L14 | 4 | v         | parámetro | 2 | -1 | null  | 1 |                               |
+    | L14 | 5 | k         | parámetro | 0 | -1 | null  | 1 |                               |
+    | L16 | 6 | x         | variable  | 0 | -1 | null  | 1 |                               |
+    | L16 | 7 | v1        | variable  | 3 | -1 | null  | 1 |                               |
+    | L20 |   |           |           |   |    |       |   | Se elimina Cod 3, 4, 5, 6 y 7 |
+    | L27 |   |           |           |   |    |       |   | Se eliminan todas las lineas  |

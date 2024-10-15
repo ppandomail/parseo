@@ -61,7 +61,7 @@
 ### Ejemplo de Implementación de una TT única
 
 * Suponer: LP es sensible a mayúsculas
-* Suponer: Los tipos básico o predefinidos del LP se suelen agregar al crearse la tabla de tipos: int y boolean
+* Suponer: Los tipos básico o predefinidos del LP se suelen agregar al crearse la tabla de tipos: integer y boolean
 
   ```pascal
   1:  program p;
@@ -181,8 +181,8 @@
 * Símbolos en un programa: constantes, variables, subprogramas y parámetros de los subprogramas
 * La TS mantiene una gestión de ámbitos. Por lo tanto, hay también al menos dos implementaciones posibles para la TS, con una sola tabla o con una pila de tablas
 * En tiempo de compilación, se mantiene la TT y TS en memoria, pero en tiempo de ejecución, sólo son los símbolos los que se guardan en la memoria que ocupa el programa compilado, ya que ellos son los contenedores de la información que se procesa
-* Generalmente, la manera de guardar información de los símbolos es en la memoria de la computadora donde corre el programa compilado. Por lo tanto, los símbolos se guardan en direcciones de memoria. Es por ello que uno de los campos de cada símbolo en la TS es una dirección de memoria donde se guardará el valor del símbolo (ese valor puede cambiar a lo largo de la ejecución del programa, pero su dirección suele ser fija)
-* En cuanto a los subprogramas, son representados también por símbolos (el nombre del subprograma) pero no guardan su valor en una dirección de memoria
+* Generalmente, la manera de guardar información de los símbolos es en la memoria de la computadora donde corre el programa compilado
+* En cuanto a los subprogramas, son representados también por símbolos (el nombre del subprograma)
 * Los campos básicos de la TS son:
 
 | Campo ||
@@ -192,7 +192,6 @@
 | **Tipo**              | es el tipo al que pertenece el símbolo (de entre los tipos de la tabla de tipos). En el caso de los subprogramas es el tipo que devuelve (si no devuelve ninguno, este campo será nulo o generalmente tendrá el valor -1) |
 | **NumeroParametros**  | sólo tiene significado si se trata del símbolo de un subprograma. En otro caso se mantiene nulo o -1 |
 | **ListaDeParametros** | debe contener una lista con al menos los tipos de los parámetros de un subprograma (para poder comprobar si cuando se hace una llamada a un subprograma coinciden los tipos de los parámetros) |
-| **Dirección**         | indica la dirección en memoria (absoluta o relativa) donde estará almacenado el valor del símbolo (si tiene valor). Si el símbolo pertenece a un tipo estructurado, esta dirección guardará el contenido del primer elemento y las sucesivas los demás elementos |
 | **Ámbito**            | sólo es necesario si la implementación va a ser sólo con una TS. Si va a implementarse como una pila de tablas, este campo es innecesario |
 
 ### Ejemplo de Implementación de una TS única
@@ -219,8 +218,8 @@
 
     * TS
 
-      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Dirección | Ámbito |
-      | -- | -- | -- | -- | -- | -- | -- | -- |
+      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Ámbito |
+      | -- | -- | -- | -- | -- | -- | -- |
 
 1. Se procesa la línea 2:
     * TT
@@ -233,8 +232,8 @@
 
     * TS
 
-      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Dirección | Ámbito |
-      | -- | -- | -- | -- | -- | -- | -- | -- |
+      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Ámbito |
+      | -- | -- | -- | -- | -- | -- | -- |
 
 1. Se procesa la línea 3:
     * TT
@@ -247,12 +246,12 @@
 
     * TS
 
-      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Dirección | Ámbito |
-      | -- | -- | -- | -- | -- | -- | -- | -- |
-      | 0 | v | variable | 2 | -1 | null | **9000** | 0 |
-      | 1 | x | variable | 0 | -1 | null | **9006** | 0 |
+      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Ámbito |
+      | -- | -- | -- | -- | -- | -- | -- |
+      | 0 | v | variable | 2 | -1 | null | 0 |
+      | 1 | x | variable | 0 | -1 | null | 0 |
 
-1. Se procesa la línea 4 y 5: el contenido de las 2 tablas es el mismo:
+1. Se procesa la línea 4, 5 y 6: el contenido de las 2 tablas es el mismo:
     * TT
 
       | Cod | Nombre | TipoBase | Padre | Dimensión | Mínimo | Máximo | Ámbito |
@@ -263,17 +262,7 @@
 
     * TS
 
-      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Dirección | Ámbito |
-      | -- | -- | -- | -- | -- | -- | -- | -- |
-      | 0 | v | variable | 2 | -1 | null | **9000** | 0 |
-      | 1 | x | variable | 0 | -1 | null | **9006** | 0 |
-
-    * El contenido de la memoria ha cambiado ya que se la ha asignado un valor al elemento v[7]. Para calcular la dirección donde hay que poner el valor 15, se hacen los siguientes cálculos:
-
-      ```plain
-      dir(v, 7) = dir(v, 0) + dir (v, 7) = 9000 + (7 -5) = 9002
-      ```
-
-    * Es decir, en la posición de memoria 9002 se guardará el valor 15
-
-1. Se procesa la línea 6. Se llena la dirección donde está la variable x con el valor que hay en la dirección donde está v[7]. Es decir, la dirección 9006 se llena con el valor que hay en la dirección 9002
+      | Cod | Nombre | Categoria | Tipo | NumPar | ListaPar | Ámbito |
+      | -- | -- | -- | -- | -- | -- | -- |
+      | 0 | v | variable | 2 | -1 | null | 0 |
+      | 1 | x | variable | 0 | -1 | null | 0 |
