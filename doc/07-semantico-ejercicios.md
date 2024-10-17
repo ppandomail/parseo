@@ -17,7 +17,7 @@
     | VAR y:ARRAY[1..5] OF REAL; | float y[4]; |
     | VAR z:ARRAY[0..3] OF ARRAY[0..6] OF CHAR; | char z\[3][6]; |
 
-    * Suponer que el lexema del terminal num es un número natural. Utilizar como lenguaje de apoyo Java.
+    * Suponer que el lexema del terminal num es un número natural. Utilizar como lenguaje de apoyo Java
 
     ```grammar
     S ::= VAR id : T ;
@@ -61,7 +61,7 @@
     E -> num | id
     ```
 
-    * Suponer que **num** es del tipo entero (integer) e **id** es el identificador de una variable que está en la tabla de símbolos (junto a la información de su tipo).
+    * Suponer que **num** es del tipo entero (integer) e **id** es el identificador de una variable que está en la tabla de símbolos (junto a la información de su tipo)
 
     ```grammar
     E ::= E1 + E2 ;
