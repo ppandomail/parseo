@@ -40,15 +40,15 @@
           :}
     T ::= REAL
           {:  T.array = null;
-              T.tipo = “float”;
+              T.tipo = "float";
           :}
         | INTEGER
           {:  T.array = null;
-              T.tipo = “int”;
+              T.tipo = "int";
           :}
         | CHAR
           {:  T.array = null;
-              T.tipo = “char”;
+              T.tipo = "char";
           :}
     ```
 
@@ -104,7 +104,7 @@
               }
           :}
     S ::= if E then S1
-          {:  if (E.tipo == “boolean”) {
+          {:  if (E.tipo == "boolean") {
                 S1.tipo = S.tipo;
               } else {
                 ErrorSemantico("La condicion del if no es del tipo logico");
