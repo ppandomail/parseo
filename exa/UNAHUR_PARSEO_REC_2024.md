@@ -38,7 +38,6 @@
     exp       -> 0 | 1
     ```
 
-
 1. Constrúyase el parser ASAP SLR y muéstrese el parsing para una entrada válida y otra inválida
 
     ```plain
