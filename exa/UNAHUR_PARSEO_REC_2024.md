@@ -9,7 +9,7 @@
 
 ---
 
-### Recuperatorio noviembre 2024
+### Recuperatorio diciembre 2024
 
 * ALUMNO:  
 * LU:
@@ -29,22 +29,18 @@
 
 ---
 
-1. Constrúyase el parser ASDP LL(1) y muéstrese el parsing para una entrada válida y otra inválida con longitudes mayores a cinco
+1. Constrúyase el parser ASDP LL(1) y muéstrese el parsing para buude y beu
 
     ```plain
-    stmt      -> if-stmt | other
-    if-stmt   -> if (exp) stmt else-part
-    else-part -> else stmt | λ
-    exp       -> 0 | 1
+    P -> bSe
+    S -> uS | dS | λ
     ```
 
-1. Constrúyase el parser ASAP SLR y muéstrese el parsing para una entrada válida y otra inválida
+1. Constrúyase el parser ASAP SLR y muéstrese el parsing para buude y beu
 
     ```plain
-    stmt      -> if-stmt | other
-    if-stmt   -> if (exp) stmt else-part
-    else-part -> else stmt | λ
-    exp       -> 0 | 1
+    P -> bSe
+    S -> uS | dS | λ
     ```
 
 ---
