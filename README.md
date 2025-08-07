@@ -1,29 +1,26 @@
 # Parseo y Generación de Código (UNAHUR)
 
-## Docentes
+## Docente
 
-* Titular: Mg. Ing. Pablo Pandolfo
+* Titular: Mg. Esp. Ing. Pablo Pandolfo
 
 ## Objetivos
 
 * Analizar y evaluar características de un traductor para su inclusión en un proyecto de informática
-* Desarrollar traductores
-* Entender cómo se construyen los traductores (decisiones de diseño)
+* Diseñar y desarrollar traductores
 
 ## Programa
 
-| Unidad | Contenido | Herramientas | Ejercicios |
-| -- | -- | -- | -- |
-| 01 | [Introducción](doc/01-intro-contenido.md)      |                                                |                                               |
-| 02 | [Scanner](doc/02-scanner-contenido.md)         | [Herramientas](doc/02-scanner-herramientas.md) | [Ejercicios](doc/02-scanner-ejercicios.md)    |
-| 03 | [Parser](doc/03-parser-contenido.md)           | [Herramientas](doc/03-parser-herramientas.md)  | [Ejercicios](doc/03-parser-ejercicios.md)     |
-| 04 | [ASD](doc/04-parser-asd-contenido.md)          |                                                | [Ejercicios](doc/04-parser-asd-ejercicios.md) |
-| 05 | [ASA](doc/05-parser-asa-contenido.md)          |                                                | [Ejercicios](doc/05-parser-asa-ejercicios.md) |
-| 06 | [TT y TS](doc/06-tablas-contenido.md)          |                                                | [Ejercicios](doc/06-tablas-ejercicios.md)     |
-| 07 | [Semántico](doc/07-semantico-contenido.md)     |                                                | [Ejercicios](doc/07-semantico-ejercicios.md)  |
-| 08 | [G. Código](doc/08-generacion-contenido.md)    |                                                |                                               |
-| 09 | [Code Smells](doc/09-codesmells-contenido.md)  |                                                |                                               |
-| 10 | [Refactoring](doc/10-refactoring-contenido.md) |                                                |                                               |
+| Unidad | Contenido                            | TPs                                    |
+| --     | --                                   | --                                     |
+| 01     | [Introducción](doc/01-intro.ipynb)   | [TP Intro](tps/01-intro.ipynb)         |
+| 02     | [Scanner](doc/02-scanner.ipynb)      | [TP Scanner](tps/02-scanner.ipynb)     |
+| 03     | [Parser](doc/03-parser.ipynb)        | [TP Parser](tps/03-parser.ipynb)       |
+| 04     | [ASD](doc/04-asd.ipynb)              | [TP ASD](tps/04-asd.ipynb)             |
+| 05     | [ASA](doc/05-asa.ipynb)              | [TP ASA](tps/05-asa.ipynb)             |
+| 06     | [TT y TS](doc/06-tablas.ipynb)       | [TP Tablas](tps/06-tablas.ipynb)       |
+| 07     | [Semántico](doc/07-semantico.ipynb)  | [TP Semántico](tps/07-semantico.ipynb) |
+| 08     | [G. Código](doc/08-generacion.ipynb) |                                        |
 
 ## Bibliografía
 
