@@ -2,7 +2,7 @@
 
 ## Docente
 
-* Titular: Mg. Esp. Ing. Pablo Pandolfo
+* Titular: Mg. Ing. Pablo Pandolfo
 
 ## Objetivos
 
@@ -11,16 +11,19 @@
 
 ## Programa
 
-| Unidad | Contenido                            | TPs                                    |
-| --     | --                                   | --                                     |
-| 01     | [Introducción](doc/01-intro.ipynb)   | [TP Intro](tps/01-intro.ipynb)         |
-| 02     | [Scanner](doc/02-scanner.ipynb)      | [TP Scanner](tps/02-scanner.ipynb)     |
-| 03     | [Parser](doc/03-parser.ipynb)        | [TP Parser](tps/03-parser.ipynb)       |
-| 04     | [ASD](doc/04-asd.ipynb)              | [TP ASD](tps/04-asd.ipynb)             |
-| 05     | [ASA](doc/05-asa.ipynb)              | [TP ASA](tps/05-asa.ipynb)             |
-| 06     | [TT y TS](doc/06-tablas.ipynb)       | [TP Tablas](tps/06-tablas.ipynb)       |
-| 07     | [Semántico](doc/07-semantico.ipynb)  | [TP Semántico](tps/07-semantico.ipynb) |
-| 08     | [G. Código](doc/08-generacion.ipynb) |                                        |
+| Unidad | Contenido                                                                   | TPs                                  |
+| --     | --                                                                          | --                                   |
+| 01     | [Introducción](https://github.com/ppandomail/lf/blob/main/doc/02-app.ipynb) | [TP Intro](https://github.com/ppandomail/lf/blob/main/tps/02-app.ipynb)         |
+| 02     | [Scanner](https://github.com/ppandomail/lf/blob/main/doc/07-scanner.ipynb)  | [TP Scanner](https://github.com/ppandomail/lf/blob/main/tps/07-scanner.ipynb)     |
+| 03     | [Parser](https://github.com/ppandomail/lf/blob/main/doc/10-parsers.ipynb)   | [TP Parser](https://github.com/ppandomail/lf/blob/main/tps/10-parsers.ipynb)       |
+| 03     | [Tools](https://github.com/ppandomail/lf/blob/main/doc/11-tools.ipynb)      | [TP Tools](https://github.com/ppandomail/lf/blob/main/tps/11-tools.ipynb)|
+| 04     | [ASDB](https://github.com/ppandomail/lf/blob/main/doc/12-asdb.ipynb)        | [TP ASDB](https://github.com/ppandomail/lf/blob/main/tps/12-asdb.ipynb)             |
+| 04     | [ASDP](https://github.com/ppandomail/lf/blob/main/doc/13-asdp.ipynb)        | [TP ASDP](https://github.com/ppandomail/lf/blob/main/tps/13-asdp.ipynb)             |
+| 05     | [ASAB](https://github.com/ppandomail/lf/blob/main/doc/14-asab.ipynb)        | [TP ASAB](https://github.com/ppandomail/lf/blob/main/tps/14-asab.ipynb)             |
+| 05     | [ASAP](https://github.com/ppandomail/lf/blob/main/doc/15-asap.ipynb)        | [TP ASAP](https://github.com/ppandomail/lf/blob/main/tps/15-asap.ipynb)             |
+| 06     | [TT y TS](https://github.com/ppandomail/lf/blob/main/doc/16-tablas.ipynb)   | [TP TT/TS](https://github.com/ppandomail/lf/blob/main/tps/16-tablas.ipynb)       |
+| 07     | [Semántico](https://github.com/ppandomail/lf/blob/main/doc/17-sem.ipynb)    | [TP Semántico](https://github.com/ppandomail/lf/blob/main/tps/17-sem.ipynb) |
+| 08     | [G. Código](https://github.com/ppandomail/lf/blob/main/doc/18-gen.ipynb)    |                                     |
 
 ## Bibliografía
 
